@@ -496,7 +496,7 @@
     const steps = [
         { num: 1, title: "Step 1 — Start Your Song", desc: "Get lyrics + style from NUSO. Paste in, then click.", actionText: "▶ Create Step 1" },
         { num: 2, title: "Step 2 — Pick Best Take & Click", desc: "Listen. Select the best version. Hit the button.", actionText: "▶ Create Step 2" },
-        { num: 3, title: "Step 2.5 — Optional Vocal Pass", desc: "Skip if happy. Or click for a tighter vocal lock.", actionText: "▶ Optional Vocal Pass" },
+        { num: 3, title: "Step 2.5 — Vocal Pass", desc: "Click for a tighter vocal lock.", actionText: "▶ Vocal Pass" },
         { num: 4, title: "Step 3 — Click to Polish", desc: "Select best take. Click. Let it work.", actionText: "▶ Create Step 3" },
         { num: 5, title: "Step 4 — Stitch the Full Song", desc: "Select best take. Click 'Get Whole Song' when ready.", actionText: "▶ Stitch Whole Song" },
         { num: 6, title: "Step 5 — Final Pass", desc: "Select best take. Click. Almost done.", actionText: "▶ Create Step 5" },
@@ -557,7 +557,7 @@
         <!-- METADATA VAULT SECTION -->
         <div class="vnr-collapsible-section">
             <div class="vnr-collapsible-header" id="vnr-vault-toggle">
-                <span>📁 METADATA VAULT</span>
+                <span>📁 METADATA VAULT (AUTOMATED)</span>
                 <span id="vnr-vault-arrow">▶</span>
             </div>
             <div class="vnr-collapsible-content" id="vnr-vault-content">
@@ -568,10 +568,6 @@
                 <div class="vnr-field-group">
                     <label class="vnr-label">SAVED LYRICS</label>
                     <textarea class="vnr-input vnr-textarea" id="vnr-vault-lyrics" placeholder="No lyrics saved yet"></textarea>
-                </div>
-                <div class="vnr-btn-row">
-                    <button class="vnr-vault-btn" id="vnr-vault-grab" title="Scrapes page inputs or active player fiber">Grab Active</button>
-                    <button class="vnr-vault-btn" id="vnr-vault-push">Push Active</button>
                 </div>
             </div>
         </div>
@@ -1209,8 +1205,16 @@
     }
 
     function applyStepAction(stepNum) {
-        const savedStyle = localStorage.getItem('vnr-original-style') || "vocals, genre";
-        const savedLyrics = localStorage.getItem('vnr-original-lyrics') || "";
+        let savedStyle = localStorage.getItem('vnr-original-style') || "";
+        let savedLyrics = localStorage.getItem('vnr-original-lyrics') || "";
+        
+        // AUTOMATED GRAB: If we don't have style or lyrics saved yet, grab them now!
+        if (!savedStyle && !savedLyrics) {
+            console.log("VNR: No saved metadata found in Vault. Automatically grabbing...");
+            grabFieldsToVault();
+            savedStyle = localStorage.getItem('vnr-original-style') || "vocals, genre";
+            savedLyrics = localStorage.getItem('vnr-original-lyrics') || "";
+        }
         
         switch(stepNum) {
             case 1: // Genesis Base
@@ -1236,7 +1240,7 @@
                 });
                 break;
                 
-            case 3: // Optional: Vocal Lock (Extend @ 0:06)
+            case 3: // Vocal Pass (Extend @ 0:06)
                 ensureRemixPanelOpen(() => {
                     switchToMode('Extend', () => {
                         const extendInput = findExtendInput();
@@ -1246,7 +1250,7 @@
                             setReactInputValue(extendInput, "00:06.0");
                             if (styleBox) setReactInputValue(styleBox, "");
                             if (lyricsBox) setReactInputValue(lyricsBox, savedLyrics);
-                            showToast("Locked extend @ 0:06. Cleared style, re-pasted lyrics.", "success");
+                            showToast("Locked extend @ 0:06 (Vocal Pass). Cleared style, re-pasted lyrics.", "success");
                             triggerAutoCreate();
                         } else {
                             showToast("Extend input not found. Try toggling 'Extend' manually.", "error");
@@ -1254,7 +1258,6 @@
                     });
                 });
                 break;
-                
             case 4: // Cover: No Style
                 ensureRemixPanelOpen(() => {
                     switchToMode('Cover', () => {
@@ -1478,8 +1481,11 @@
             resetBtn.onclick = function(e) {
                 e.preventDefault();
                 e.stopPropagation();
+                localStorage.removeItem('vnr-original-style');
+                localStorage.removeItem('vnr-original-lyrics');
+                syncVaultUI();
                 setStep(1);
-                showToast("Path restarted. Selected Step 1.", "info");
+                showToast("Path restarted. Selected Step 1 and cleared Vault metadata.", "info");
             };
         }
 
@@ -1510,35 +1516,16 @@
             };
         }
 
-        // Vault Buttons
-        const vaultGrab = panel.querySelector('#vnr-vault-grab');
-        if (vaultGrab) {
-            vaultGrab.onclick = function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                grabFieldsToVault();
-            };
-        }
-
-        const vaultPush = panel.querySelector('#vnr-vault-push');
-        if (vaultPush) {
-            vaultPush.onclick = function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                pushVaultToFields();
-            };
-        }
-
         // Vault input listeners
         const vaultStyleInput = panel.querySelector('#vnr-vault-style');
         if (vaultStyleInput) {
-            vaultStyleInput.onchange = function() {
+            vaultStyleInput.oninput = function() {
                 localStorage.setItem('vnr-original-style', vaultStyleInput.value.trim());
             };
         }
         const vaultLyricsInput = panel.querySelector('#vnr-vault-lyrics');
         if (vaultLyricsInput) {
-            vaultLyricsInput.onchange = function() {
+            vaultLyricsInput.oninput = function() {
                 localStorage.setItem('vnr-original-lyrics', vaultLyricsInput.value.trim());
             };
         }
