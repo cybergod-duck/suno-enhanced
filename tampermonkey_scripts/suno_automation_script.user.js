@@ -735,6 +735,21 @@
         return null;
     }
 
+    function waitForElement(checkFn, callback, timeout = 3000) {
+        const startTime = Date.now();
+        function check() {
+            const result = checkFn();
+            if (result) {
+                callback(result);
+            } else if (Date.now() - startTime < timeout) {
+                setTimeout(check, 50);
+            } else {
+                callback(null);
+            }
+        }
+        check();
+    }
+
     function findExtendInput() {
         let input = document.querySelector('input[placeholder*="0:00"]') ||
                     document.querySelector('input[placeholder*="00:00"]') ||
@@ -751,9 +766,19 @@
             if (ph.includes('0:') || ph.includes('00:') || name.includes('extend') || id.includes('extend')) {
                 return inp;
             }
-            const parentText = (inp.parentElement ? inp.parentElement.textContent : '').toLowerCase();
-            if (parentText.includes('extend from') || parentText.includes('extend point')) {
-                return inp;
+            
+            // Traverse up to 3 levels to find text like "extend from" or "extend point"
+            let current = inp.parentElement;
+            let levels = 0;
+            while (current && levels < 3) {
+                const text = (current.textContent || '').toLowerCase();
+                if (text.includes('extend from') || text.includes('extend point') || text.includes('extend time')) {
+                    if (inp.type !== 'hidden' && inp.type !== 'checkbox' && inp.type !== 'radio') {
+                        return inp;
+                    }
+                }
+                current = current.parentElement;
+                levels++;
             }
         }
         return null;
@@ -800,66 +825,193 @@
     }
 
     function findModeDropdown() {
-        let drop = document.querySelector('[class*="mode-select"]') || 
-                   document.querySelector('[id*="mode-select"]') ||
-                   document.querySelector('[class*="ModeSelect"]');
+        let panelContainer = null;
+        const styleTextarea = findStyleTextarea();
+        if (styleTextarea) {
+            panelContainer = styleTextarea.closest('form') || 
+                             styleTextarea.closest('[class*="create"]') || 
+                             styleTextarea.closest('[class*="panel"]') || 
+                             styleTextarea.closest('[class*="sidebar"]') ||
+                             styleTextarea.parentElement?.parentElement?.parentElement;
+        }
+        
+        const searchScope = panelContainer || document;
+
+        let drop = searchScope.querySelector('[class*="mode-select"]') || 
+                   searchScope.querySelector('[id*="mode-select"]') ||
+                   searchScope.querySelector('[class*="ModeSelect"]') ||
+                   searchScope.querySelector('button[aria-haspopup="listbox"]') ||
+                   searchScope.querySelector('button[aria-haspopup="menu"]');
         if (drop) return drop;
 
-        const elements = Array.from(document.querySelectorAll('button, div, span, p'));
+        const modes = ['Cover', 'Extend', 'Remix', 'Add Instrumental', 'Add Vocals', 'Mashup'];
+        const elements = Array.from(searchScope.querySelectorAll('button, div, span, p'));
+        
+        // 1. Cleaned text exact match (to handle "Cover ▼" -> "Cover")
         for (const el of elements) {
-            const text = el.innerText.trim();
-            if (['Cover', 'Extend', 'Remix', 'Add Instrumental', 'Add Vocals', 'Mashup'].includes(text)) {
-                if (el.tagName === 'BUTTON' || el.getAttribute('role') === 'button' || el.onclick || el.className.includes('button') || el.className.includes('select')) {
+            if (el.offsetWidth === 0 && el.offsetHeight === 0) continue;
+            const rawText = el.innerText || '';
+            const cleanText = rawText.replace(/[^a-zA-Z0-9\s]/g, '').trim();
+            if (modes.includes(cleanText)) {
+                if (el.tagName === 'BUTTON' || el.getAttribute('role') === 'button' || el.onclick || el.className.includes('button') || el.className.includes('select') || el.className.includes('trigger')) {
                     return el;
                 }
             }
         }
+        
+        // 2. Substring match
         for (const el of elements) {
-            const text = el.innerText.trim();
-            if (['Cover', 'Extend'].includes(text)) {
-                return el;
+            if (el.offsetWidth === 0 && el.offsetHeight === 0) continue;
+            const rawText = (el.innerText || '').trim();
+            for (const mode of modes) {
+                if (rawText === mode || rawText.startsWith(mode) || rawText.includes(mode + ' ')) {
+                    if (el.tagName === 'BUTTON' || el.getAttribute('role') === 'button' || el.className.includes('button') || el.className.includes('select') || el.className.includes('trigger')) {
+                        return el;
+                    }
+                }
             }
         }
+
+        // Global fallback if container search failed
+        if (searchScope !== document) {
+            const globalElements = Array.from(document.querySelectorAll('button, div, span, p'));
+            for (const el of globalElements) {
+                if (el.offsetWidth === 0 && el.offsetHeight === 0) continue;
+                const rawText = el.innerText || '';
+                const cleanText = rawText.replace(/[^a-zA-Z0-9\s]/g, '').trim();
+                if (modes.includes(cleanText)) {
+                    if (el.tagName === 'BUTTON' || el.getAttribute('role') === 'button' || el.onclick || el.className.includes('button') || el.className.includes('select') || el.className.includes('trigger')) {
+                        return el;
+                    }
+                }
+            }
+        }
+        
         return null;
     }
 
     function switchToMode(targetMode, callback) {
+        console.log(`VNR: switchToMode called for: ${targetMode}`);
         const extendInput = findExtendInput();
         if (targetMode === 'Extend' && extendInput) {
+            console.log("VNR: Already in Extend mode (extend input visible).");
             if (callback) callback();
             return;
         }
         if (targetMode === 'Cover' && !extendInput) {
-            if (callback) callback();
+            const currentDropdown = findModeDropdown();
+            if (currentDropdown) {
+                const currentText = (currentDropdown.innerText || '').replace(/[^a-zA-Z0-9\s]/g, '').trim().toLowerCase();
+                if (currentText === 'cover') {
+                    console.log("VNR: Already in Cover mode.");
+                    if (callback) callback();
+                    return;
+                }
+            }
+        }
+
+        // Helper to find a direct tab/button for targetMode (e.g. side-by-side tabs)
+        function findDirectTab() {
+            const candidates = Array.from(document.querySelectorAll('button, [role="tab"], [role="button"], a, span'));
+            for (const el of candidates) {
+                if (el.offsetWidth === 0 && el.offsetHeight === 0) continue;
+                const rawText = el.innerText || '';
+                const cleanText = rawText.replace(/[^a-zA-Z0-9\s]/g, '').trim().toLowerCase();
+                if (cleanText === targetMode.toLowerCase()) {
+                    const isDropdown = el.querySelector('[class*="arrow"]') || el.innerText.includes('▼') || el.innerText.includes('▾');
+                    if (!isDropdown && (el.tagName === 'BUTTON' || el.getAttribute('role') === 'tab' || el.className.includes('button') || el.className.includes('tab'))) {
+                        return el;
+                    }
+                }
+            }
+            return null;
+        }
+
+        const directTab = findDirectTab();
+        if (directTab) {
+            console.log(`VNR: Found direct tab/button for ${targetMode}. Clicking it.`);
+            directTab.click();
+            
+            if (targetMode === 'Extend') {
+                waitForElement(findExtendInput, (el) => {
+                    if (el) {
+                        console.log("VNR: Successfully switched to Extend mode via direct tab.");
+                        if (callback) callback();
+                    } else {
+                        console.warn("VNR: Extend input did not appear after clicking direct tab. Trying dropdown.");
+                        tryDropdownFlow();
+                    }
+                }, 1200);
+            } else {
+                setTimeout(callback, 300);
+            }
             return;
         }
 
-        const dropdown = findModeDropdown();
-        if (dropdown) {
-            dropdown.click();
-            console.log("VNR: Clicked mode dropdown.");
-            
-            setTimeout(() => {
-                const menuOptions = Array.from(document.querySelectorAll('div, span, button, li, p, a'));
-                let clicked = false;
-                for (const opt of menuOptions) {
-                    const optText = opt.innerText.trim().toLowerCase();
-                    if (optText === targetMode.toLowerCase() || optText.endsWith(' ' + targetMode.toLowerCase()) || optText.startsWith(targetMode.toLowerCase() + ':')) {
-                        opt.click();
-                        console.log(`VNR: Automatically selected mode: ${targetMode}`);
-                        showToast(`Switched page to ${targetMode} mode automatically!`, "success");
-                        clicked = true;
-                        break;
-                    }
-                }
+        tryDropdownFlow();
+
+        function tryDropdownFlow() {
+            const dropdown = findModeDropdown();
+            if (dropdown) {
+                dropdown.click();
+                console.log("VNR: Clicked mode dropdown.");
                 
-                if (clicked && callback) {
-                    setTimeout(callback, 300);
-                }
-            }, 150);
-        } else {
-            showToast(`Mode dropdown not found. Please click '${targetMode}' manually.`, "warning");
-            if (callback) callback();
+                // Poll for the options menu to appear rather than static timeout
+                const getMenuOptions = () => {
+                    const opts = Array.from(document.querySelectorAll('div, span, button, li, p, a, [role="menuitem"], [role="option"]'));
+                    return opts.filter(opt => {
+                        if (opt.offsetWidth === 0 && opt.offsetHeight === 0) return false;
+                        const rawOptText = opt.innerText || '';
+                        const optTextClean = rawOptText.trim().toLowerCase();
+                        const lines = rawOptText.split('\n').map(l => l.trim().toLowerCase());
+                        
+                        return lines.includes(targetMode.toLowerCase()) || 
+                               lines[0] === targetMode.toLowerCase() ||
+                               optTextClean === targetMode.toLowerCase() ||
+                               optTextClean.startsWith(targetMode.toLowerCase() + ' ') ||
+                               optTextClean.startsWith(targetMode.toLowerCase() + ':') ||
+                               optTextClean.startsWith(targetMode.toLowerCase() + '\n');
+                    });
+                };
+
+                waitForElement(() => {
+                    const matches = getMenuOptions();
+                    return matches.length > 0 ? matches[0] : null;
+                }, (opt) => {
+                    if (opt) {
+                        opt.click();
+                        console.log(`VNR: Clicked dropdown option for: ${targetMode}`);
+                        showToast(`Switched page to ${targetMode} mode automatically!`, "success");
+                        
+                        if (callback) {
+                            if (targetMode === 'Extend') {
+                                waitForElement(findExtendInput, (el) => {
+                                    if (el) {
+                                        console.log("VNR: Extend input appeared after dropdown selection.");
+                                        if (callback) callback();
+                                    } else {
+                                        console.warn("VNR: Extend input did not appear after dropdown selection.");
+                                        if (callback) callback();
+                                    }
+                                }, 2000);
+                            } else if (targetMode === 'Cover') {
+                                waitForElement(() => !findExtendInput(), () => {
+                                    if (callback) callback();
+                                }, 2000);
+                            } else {
+                                setTimeout(callback, 300);
+                            }
+                        }
+                    } else {
+                        console.warn(`VNR: Menu option for ${targetMode} not found after clicking dropdown.`);
+                        showToast(`Could not find '${targetMode}' option in menu. Please select it manually.`, "warning");
+                        if (callback) callback();
+                    }
+                }, 1500); // Wait up to 1.5s for menu options to appear
+            } else {
+                showToast(`Mode dropdown not found. Please click '${targetMode}' manually.`, "warning");
+                if (callback) callback();
+            }
         }
     }
 
@@ -997,11 +1149,22 @@
             return;
         }
 
+        const checkPanelOpened = () => {
+            return findStyleTextarea() || findLyricsTextarea() || findExtendInput();
+        };
+
         const remixBtn = findRemixButton();
         if (remixBtn) {
             remixBtn.click();
             showToast("Opening Remix panel automatically...", "info");
-            setTimeout(callback, 800);
+            waitForElement(checkPanelOpened, (el) => {
+                if (el) {
+                    setTimeout(callback, 150); // Small buffer for rendering
+                } else {
+                    console.warn("VNR: Timeout waiting for panel textareas to appear.");
+                    if (callback) callback();
+                }
+            }, 3000);
         } else {
             const player = document.querySelector('[class*="player" i]') || document.querySelector('[class*="Player" i]');
             if (player) {
@@ -1016,11 +1179,17 @@
                         if (remixOption) {
                             remixOption.click();
                             showToast("Opening Remix panel automatically...", "info");
-                            setTimeout(callback, 800);
+                            waitForElement(checkPanelOpened, (el) => {
+                                if (el) {
+                                    setTimeout(callback, 150);
+                                } else {
+                                    if (callback) callback();
+                                }
+                            }, 3000);
                         } else {
                             showToast("Please click 'Remix' on your winning track manually.", "warning");
                         }
-                    }, 200);
+                    }, 250);
                     return;
                 }
             }
