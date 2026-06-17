@@ -1260,39 +1260,30 @@
         
         ensureCustomMode();
 
-        let savedStyle = localStorage.getItem('vnr-original-style') || "vocals, genre";
+        // Use what's in the field; save to vault. Do NOT reconstruct.
+        let savedStyle = localStorage.getItem('vnr-original-style') || "";
         if (styleBox && styleBox.value.trim()) {
             savedStyle = styleBox.value.trim();
             localStorage.setItem('vnr-original-style', savedStyle);
         }
-
-        let tokens = savedStyle.split(',').map(t => t.trim()).filter(Boolean);
-        let vocalInfo = tokens[0] || "upfront vocals";
-        let delivery = tokens[1] || "clear delivery";
-        let genreBpm = tokens[2] || "indie pop";
-        
-        let optimizedStyle = `${vocalInfo}, ${delivery}, upfront — ${genreBpm}, spacious mix, vocal-forward, minimalist production`;
-        
-        if (styleBox) {
-            setReactInputValue(styleBox, optimizedStyle);
+        if (styleBox && savedStyle) {
+            setReactInputValue(styleBox, savedStyle);
         }
 
+        // Lyrics: use as-is, never re-wrap
         if (lyricsBox) {
             let lyrics = lyricsBox.value.trim();
             if (!lyrics) {
                 lyrics = localStorage.getItem('vnr-original-lyrics') || "";
             }
             if (lyrics) {
-                if (!lyrics.includes('[')) {
-                    lyrics = `[Verse 1]\n${lyrics}`;
-                }
                 setReactInputValue(lyricsBox, lyrics);
                 localStorage.setItem('vnr-original-lyrics', lyrics);
             }
         }
-        
+
         syncVaultUI();
-        showToast("Genesis style & lyrics optimized.", "success");
+        showToast("Genesis style & lyrics locked to vault as-is.", "success");
         triggerAutoCreate();
     }
 
