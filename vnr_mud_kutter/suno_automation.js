@@ -256,104 +256,121 @@
             flex-grow: 1 !important;
             display: flex !important;
             flex-direction: column !important;
-            gap: 4px !important;
+            gap: 1px !important;
             margin-bottom: 8px !important;
             overflow-y: auto !important;
-            padding-right: 2px !important;
+            margin-left: -14px !important;
+            margin-right: -14px !important;
+            padding-right: 0 !important;
         }
         .vnr-steps-wrapper::-webkit-scrollbar {
-            width: 4px !important;
+            width: 5px !important;
         }
         .vnr-steps-wrapper::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.02) !important;
+            background: rgba(0, 0, 0, 0.3) !important;
         }
         .vnr-steps-wrapper::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.08) !important;
+            background: rgba(255, 0, 204, 0.4) !important;
             border-radius: 4px !important;
         }
         .vnr-steps-wrapper::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 0, 204, 0.25) !important;
+            background: rgba(0, 255, 255, 0.7) !important;
         }
 
         .vnr-step-item {
-            background: rgba(255, 255, 255, 0.01) !important;
-            border: 1px solid rgba(255, 255, 255, 0.03) !important;
-            border-radius: 6px !important;
-            padding: 6px 8px !important;
+            background: rgba(255, 255, 255, 0.015) !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.02) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.02) !important;
+            border-left: 5px solid transparent !important;
+            border-right: none !important;
+            border-radius: 0 !important;
+            padding: 12px 18px !important;
             display: flex !important;
             align-items: center !important;
-            gap: 8px !important;
+            gap: 14px !important;
             cursor: pointer !important;
-            transition: all 200ms ease !important;
+            transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1) !important;
             position: relative !important;
         }
         .vnr-step-item:hover {
-            background: rgba(255, 255, 255, 0.03) !important;
-            border-color: rgba(255, 255, 255, 0.08) !important;
+            background: rgba(255, 255, 255, 0.04) !important;
+            border-left: 5px solid rgba(255, 255, 255, 0.2) !important;
         }
         .vnr-step-item.active {
-            background: rgba(0, 255, 255, 0.03) !important;
-            border-color: rgba(0, 255, 255, 0.2) !important;
-        }
-        .vnr-step-item.active::before {
-            content: '' !important;
-            position: absolute !important;
-            left: 0 !important;
-            top: 20% !important;
-            height: 60% !important;
-            width: 2px !important;
-            background: #00ffff !important;
-            border-radius: 0 4px 4px 0 !important;
+            background: linear-gradient(90deg, rgba(0, 255, 255, 0.12) 0%, rgba(255, 0, 204, 0.03) 100%) !important;
+            border-top: 1px solid rgba(0, 255, 255, 0.25) !important;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.15) !important;
+            border-left: 5px solid #00ffff !important;
+            box-shadow: inset 0 0 15px rgba(0, 255, 255, 0.15), 0 4px 20px rgba(0, 255, 255, 0.2) !important;
+            z-index: 2 !important;
         }
         .vnr-step-item.completed {
-            border-color: rgba(76, 217, 100, 0.08) !important;
-            opacity: 0.6 !important;
+            background: linear-gradient(90deg, rgba(76, 217, 100, 0.06) 0%, rgba(76, 217, 100, 0.01) 100%) !important;
+            border-left: 5px solid #4cd964 !important;
+            border-top-color: rgba(76, 217, 100, 0.05) !important;
+            border-bottom-color: rgba(76, 217, 100, 0.05) !important;
+            opacity: 0.8 !important;
+        }
+        .vnr-step-item.completed:hover {
+            background: linear-gradient(90deg, rgba(76, 217, 100, 0.1) 0%, rgba(76, 217, 100, 0.02) 100%) !important;
+            opacity: 1 !important;
         }
         
         .vnr-step-icon {
-            width: 16px !important;
-            height: 16px !important;
+            width: 24px !important;
+            height: 24px !important;
             border-radius: 50% !important;
-            background: rgba(255, 255, 255, 0.03) !important;
-            border: 1px solid rgba(255, 255, 255, 0.06) !important;
+            background: rgba(255, 255, 255, 0.04) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
-            font-size: 8px !important;
-            font-weight: 700;
+            font-size: 11px !important;
+            font-weight: 800 !important;
             font-family: ui-monospace, monospace !important;
-            color: rgba(255, 255, 255, 0.4) !important;
+            color: rgba(255, 255, 255, 0.5) !important;
             flex-shrink: 0 !important;
+            transition: all 200ms ease !important;
         }
         .vnr-step-item.active .vnr-step-icon {
             background: #00ffff !important;
             border-color: #00ffff !important;
             color: #000000 !important;
-            box-shadow: 0 0 6px rgba(0, 255, 255, 0.4) !important;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5) !important;
         }
         .vnr-step-item.completed .vnr-step-icon {
-            background: rgba(76, 217, 100, 0.08) !important;
+            background: rgba(76, 217, 100, 0.1) !important;
             border-color: #4cd964 !important;
             color: #4cd964 !important;
+            box-shadow: 0 0 6px rgba(76, 217, 100, 0.2) !important;
         }
         
         .vnr-step-details {
             display: flex !important;
             flex-direction: column !important;
-            gap: 1px !important;
+            gap: 2px !important;
         }
         .vnr-step-name {
-            font-size: 10px !important;
-            font-weight: 600 !important;
+            font-size: 11px !important;
+            font-weight: 700 !important;
+            color: rgba(255, 255, 255, 0.9) !important;
+            letter-spacing: 0.3px !important;
+        }
+        .vnr-step-item.active .vnr-step-name {
+            color: #ffffff !important;
+            text-shadow: 0 0 8px rgba(0, 255, 255, 0.4) !important;
         }
         .vnr-step-item.completed .vnr-step-name {
-            color: rgba(255, 255, 255, 0.5) !important;
-            text-decoration: line-through !important;
+            color: rgba(255, 255, 255, 0.6) !important;
+            text-decoration: none !important;
         }
         .vnr-step-desc {
-            font-size: 8px !important;
-            color: rgba(255, 255, 255, 0.3) !important;
-            line-height: 1.1 !important;
+            font-size: 9px !important;
+            color: rgba(255, 255, 255, 0.4) !important;
+            line-height: 1.2 !important;
+        }
+        .vnr-step-item.active .vnr-step-desc {
+            color: rgba(255, 255, 255, 0.7) !important;
         }
 
         /* ACTIONS SECTION */
