@@ -686,6 +686,8 @@
         
         el.dispatchEvent(new Event('input', { bubbles: true }));
         el.dispatchEvent(new Event('change', { bubbles: true }));
+        el.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true }));
+        el.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));
         el.dispatchEvent(new Event('blur', { bubbles: true }));
         
         return true;
@@ -942,7 +944,7 @@
                         console.warn("VNR: Extend input did not appear after clicking direct tab. Trying dropdown.");
                         tryDropdownFlow();
                     }
-                }, 1200);
+                }, 2500);
             } else {
                 setTimeout(callback, 300);
             }
@@ -1160,7 +1162,7 @@
             showToast("Opening Remix panel automatically...", "info");
             waitForElement(checkPanelOpened, (el) => {
                 if (el) {
-                    setTimeout(callback, 150); // Small buffer for rendering
+                    setTimeout(callback, 600); // Bumped to 600ms for React rendering buffer
                 } else {
                     console.warn("VNR: Timeout waiting for panel textareas to appear.");
                     if (callback) callback();
@@ -1168,12 +1170,15 @@
             }, 3000);
         } else {
             const player = document.querySelector('[class*="player" i]') || document.querySelector('[class*="Player" i]');
+            let playerOptBtnClicked = false;
+            
             if (player) {
                 const optBtn = player.querySelector('button[aria-label*="option" i]') || 
                                player.querySelector('button[title*="option" i]') ||
                                Array.from(player.querySelectorAll('button')).find(b => b.innerText.includes('...'));
                 if (optBtn) {
                     optBtn.click();
+                    playerOptBtnClicked = true;
                     setTimeout(() => {
                         const menuOptions = Array.from(document.querySelectorAll('div, span, button, li, p, a'));
                         const remixOption = menuOptions.find(o => o.innerText.trim().toLowerCase() === 'remix');
@@ -1182,19 +1187,57 @@
                             showToast("Opening Remix panel automatically...", "info");
                             waitForElement(checkPanelOpened, (el) => {
                                 if (el) {
-                                    setTimeout(callback, 150);
+                                    setTimeout(callback, 600); // Bumped to 600ms
+                                } else {
+                                    if (callback) callback();
+                                }
+                            }, 3000);
+                        } else {
+                            scanClipCards();
+                        }
+                    }, 250);
+                }
+            }
+            
+            if (!playerOptBtnClicked) {
+                scanClipCards();
+            }
+
+            function scanClipCards() {
+                const clipOptionBtns = Array.from(document.querySelectorAll('button[aria-label*="more" i], button[aria-label*="option" i], button[title*="more" i], button[title*="option" i], button[class*="more" i], button[class*="option" i]'));
+                const visibleBtns = clipOptionBtns.filter(b => b.offsetWidth > 0 && b.offsetHeight > 0);
+                
+                if (visibleBtns.length > 0) {
+                    const targetBtn = visibleBtns[0];
+                    console.log("VNR: Clicking clip card options button...");
+                    targetBtn.click();
+                    
+                    const getRemixOption = () => {
+                        const opts = Array.from(document.querySelectorAll('div, span, button, li, p, a, [role="menuitem"], [role="option"]'));
+                        return opts.find(o => o.innerText.trim().toLowerCase() === 'remix' && o.offsetWidth > 0 && o.offsetHeight > 0);
+                    };
+                    
+                    waitForElement(getRemixOption, (remixOption) => {
+                        if (remixOption) {
+                            remixOption.click();
+                            showToast("Opening Remix panel via clip menu...", "info");
+                            waitForElement(checkPanelOpened, (el) => {
+                                if (el) {
+                                    setTimeout(callback, 600); // Bumped to 600ms
                                 } else {
                                     if (callback) callback();
                                 }
                             }, 3000);
                         } else {
                             showToast("Please click 'Remix' on your winning track manually.", "warning");
+                            if (callback) callback();
                         }
-                    }, 250);
-                    return;
+                    }, 1500);
+                } else {
+                    showToast("Please click 'Remix' on your winning track manually.", "warning");
+                    if (callback) callback();
                 }
             }
-            showToast("Please click 'Remix' on your winning track manually.", "warning");
         }
     }
 
@@ -1389,7 +1432,7 @@
                         const styleBox = findStyleTextarea();
                         const lyricsBox = findLyricsTextarea();
                         if (extendInput) {
-                            setReactInputValue(extendInput, "00:01.0");
+                            setReactInputValue(extendInput, "0:01");
                             if (styleBox) setReactInputValue(styleBox, "");
                             if (lyricsBox) setReactInputValue(lyricsBox, savedLyrics);
                             showToast("Locked extend @ 0:01. Cleared style, re-pasted lyrics.", "success");
@@ -1408,7 +1451,7 @@
                         const styleBox = findStyleTextarea();
                         const lyricsBox = findLyricsTextarea();
                         if (extendInput) {
-                            setReactInputValue(extendInput, "00:06.0");
+                            setReactInputValue(extendInput, "0:06");
                             if (styleBox) setReactInputValue(styleBox, "");
                             if (lyricsBox) setReactInputValue(lyricsBox, savedLyrics);
                             showToast("Locked extend @ 0:06 (Vocal Pass). Cleared style, re-pasted lyrics.", "success");
