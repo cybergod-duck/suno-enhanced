@@ -129,6 +129,7 @@ Must run on a **Get Whole Song compiled output**. Running on an uncompiled Cover
 | 2026-06-16 | Repo created | AG | Initial method docs pushed to cybergod-duck/suno-enhanced |
 | 2026-06-17 | GitHub connector authorized | User | Perplexity now has live read access to repo |
 | 2026-06-17 | Handoff file created | Perplexity | Communication tunnel opened |
+| 2026-06-17 | Robust mode-select & element polling implemented | AG | Fixed Extend mode auto-selection via direct tab clicks, scoped element searches, glyph-stripping, and waitForElement polling. Zipped & pushed to GitHub. |
 
 ---
 
