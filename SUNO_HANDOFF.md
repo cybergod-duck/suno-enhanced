@@ -9,7 +9,7 @@
 ## ⚠️ CHANGE FLAG STATUS
 ```
 STATUS: NOMINAL — No drift detected
-LAST SCAN: 2026-06-17 @ 04:49 EDT
+LAST SCAN: 2026-06-17 @ 05:03 EDT
 SUSPECTED DRIFT: None
 CONFIRMED CHANGES: None
 NEXT SCAN TRIGGER: Manual or on degraded output report
@@ -19,7 +19,70 @@ NEXT SCAN TRIGGER: Manual or on degraded output report
 
 ## 🔴 OPEN BUG — ACTION REQUIRED (AG)
 
-None.
+### VNR-BUG-003 — Step 2 Extend Flow: Panel Won't Open, Mode Won't Switch, Timestamp Doesn't Commit
+**File:** `tampermonkey_scripts/suno_automation_script.user.js`
+**Status:** OPEN — Patch pending
+**Symptom:** Clicking Step 2 action either shows "Please click Remix manually" toast, switches to Extend but leaves timestamp field at 0:00, or silently fails to inject 0:01 into React's controlled input state.
+
+#### BUG-003a — `ensureRemixPanelOpen()` Remix button scan misses post-generation clip menu
+**Root cause:** `ensureRemixPanelOpen()` scans the player bar for a Remix button. In v5.5 post-generation flow, the Remix entry point is on the **generated clip's three-dot context menu**, not the player bar. Player scan finds nothing → falls through to "Please click Remix manually" warning.
+
+**Fix:** After the player-bar scan fails, also scan all visible three-dot / options buttons on generated clip cards:
+```javascript
+// In ensureRemixPanelOpen(), after the player optBtn block fails,
+// add a scan of clip card option buttons:
+const clipOptionBtns = Array.from(document.querySelectorAll('button[aria-label*="more" i], button[aria-label*="option" i], button[title*="more" i], button[title*="option" i]'));
+for (const btn of clipOptionBtns) {
+    btn.click();
+    // then poll for Remix option in the opened menu (same waitForElement pattern)
+    break; // click the first visible one
+}
+```
+
+#### BUG-003b — `switchToMode('Extend')` callback fires before React panel DOM mounts
+**Root cause:** After Remix panel opens, `switchToMode` is called inside `setTimeout(callback, 150)`. 150ms is not enough time for Suno's React component tree to mount the Extend/Cover tab row. `findExtendInput()` returns null, direct tab scan returns null, dropdown scan returns null.
+
+**Fix — two timeout bumps:**
+```javascript
+// In ensureRemixPanelOpen(), change:
+setTimeout(callback, 150);
+// To:
+setTimeout(callback, 600);
+
+// In switchToMode(), directTab branch waitForElement, change:
+}, 1200);
+// To:
+}, 2500);
+```
+
+#### BUG-003c — `setReactInputValue()` does not flush React controlled input state on timestamp field
+**Root cause:** The extend timestamp field is a React controlled `<input>`. The current helper dispatches `input`, `change`, and `blur` — but React's synthetic event system on Suno requires a `keydown`/`keyup` pair to flush the controlled value into internal state. Without it, the field *visually* shows `00:01.0` but React submits `0:00` when Create fires.
+
+**This fix affects ALL field injections across ALL steps, not just the timestamp.**
+
+```javascript
+// In setReactInputValue(), REPLACE the full function with:
+function setReactInputValue(el, value) {
+    if (!el) return false;
+    
+    const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+        el instanceof HTMLTextAreaElement ? HTMLTextAreaElement.prototype : HTMLInputElement.prototype,
+        'value'
+    ).set;
+    
+    nativeInputValueSetter.call(el, value);
+    
+    el.dispatchEvent(new Event('input', { bubbles: true }));
+    el.dispatchEvent(new Event('change', { bubbles: true }));
+    el.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true }));
+    el.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));
+    el.dispatchEvent(new Event('blur', { bubbles: true }));
+    
+    return true;
+}
+```
+
+**Priority order for AG:** Fix BUG-003c first (highest blast radius — all steps affected), then 003b (timing), then 003a (panel entry point).
 
 ---
 
@@ -138,7 +201,7 @@ Must run on a **Get Whole Song compiled output**. Running on an uncompiled Cover
 | Weak vocal presence | Competing style keywords burying vocal frequency | Step 5: vocal-only style, zero instrument tokens |
 | Suno ignores style prompt | Style token overload | Strip to ≤4 total tokens, lead with vocal descriptor |
 | Transition artifacts at stitch points | Contrasting-style extensions stitched without smoothing | Cover: No Style on Get Whole Song compiled output |
-| Vault appears to truncate saved style/lyrics | CSS height 38px clips vault textarea; style field is single-line input | Apply VNR-BUG-002 patch — see OPEN BUG section |
+| Extend menu won't open / 0:01 not set / mode stays on Cover | Three-part Step 2 failure: wrong panel entry point, timing race, React input not flushed | Apply VNR-BUG-003 three-part patch — see OPEN BUG section |
 
 ---
 
@@ -154,6 +217,7 @@ Must run on a **Get Whole Song compiled output**. Running on an uncompiled Cover
 | 2026-06-17 | Fixed runGenesis prompt cropping bugs (VNR-BUG-001) | AG | Updated runGenesis to use prompts and lyrics exactly as-is without token reconstruction or wrapping. Zipped & pushed to GitHub. |
 | 2026-06-17 | VNR-BUG-002 diagnosed | Perplexity | Vault textarea 38px CSS clips lyrics visually; style field is <input> and can't show multi-line prompts. localStorage intact. Two-line CSS+HTML fix documented. Awaiting AG patch. |
 | 2026-06-17 | VNR-BUG-002 patched | AG | Applied style dropdown input to textarea and 80px resizable CSS height fix for both fields. Zipped & pushed to GitHub. |
+| 2026-06-17 | VNR-BUG-003 diagnosed | Perplexity | Three-part Step 2 Extend failure: (a) ensureRemixPanelOpen misses clip card menu, (b) 150ms timing race before React mounts Extend tab row, (c) setReactInputValue missing keydown/keyup flush — affects ALL step injections. Three targeted fixes documented. Awaiting AG patch. |
 
 ---
 
