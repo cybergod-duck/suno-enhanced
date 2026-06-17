@@ -1,4 +1,4 @@
-# SUNOFORGE / VNR MUD-KUTTER
+# Suno-Enhanced
 ### Voss Neural Research LLC — Internal Project Folder
 
 ---
@@ -12,7 +12,7 @@ SUNO REVERSE ENGINEERING!/
 │   ├── .env                  ← MASTER keys (Stripe, Together.ai, Groq, all APIs)
 │   └── suno_product_config.json  (copy from root)
 │
-├── vnr_mud_kutter/           ← Chrome Extension source (load unpacked from here)
+├── suno_enhanced/            ← Chrome Extension source (load unpacked from here)
 │   ├── manifest.json
 │   ├── suno_automation.js
 │   ├── background.js
@@ -24,7 +24,7 @@ SUNO REVERSE ENGINEERING!/
 │   └── suno_x_marketing_assistant.user.js  ← X.com autopilot
 │
 ├── scripts/                  ← Build/utility scripts
-│   └── package_extension.py  ← Builds vnr_mud_kutter.zip for Chrome Store
+│   └── package_extension.py  ← Builds suno_enhanced.zip for Chrome Store
 │
 ├── research/                 ← All research docs from Tried Methods/
 │
@@ -32,7 +32,7 @@ SUNO REVERSE ENGINEERING!/
 │
 ├── Tried Methods/            ← Full research archive (82 files)
 │
-└── vnr_mud_kutter.zip        ← Latest packaged extension (reload into Chrome)
+└── suno_enhanced.zip         ← Latest packaged extension (reload into Chrome)
 ```
 
 ---
@@ -42,10 +42,10 @@ SUNO REVERSE ENGINEERING!/
 1. Open Chrome/Brave → `chrome://extensions`
 2. Enable **Developer Mode** (top right toggle)
 3. Click **Load Unpacked**
-4. Select: `SUNO REVERSE ENGINEERING!\vnr_mud_kutter\`
+4. Select: `SUNO REVERSE ENGINEERING!\suno_enhanced\`
 5. Done — go to `suno.com` — panel appears on the right edge
 
-> **OR** drag `vnr_mud_kutter.zip` onto the extensions page to install as packed.
+> **OR** drag `suno_enhanced.zip` onto the extensions page to install as packed.
 
 ---
 

@@ -22,8 +22,8 @@
 
     console.log("VNR: SunoForge X Marketing Assistant Initializing...");
 
-    // Groq API Key from your suno.env
-    const groqApiKey = "";
+    // Retrieve Groq API Key dynamically from localStorage to protect secrets
+    let groqApiKey = localStorage.getItem('vnr-groq-api-key') || "";
 
     // SoundCloud Tracks list from 5 months ago until now
     const tracks = [
@@ -53,9 +53,11 @@
     const panel = document.createElement('div');
     panel.id = 'vnr-x-panel';
     panel.innerHTML = "<h3>VNR X AUTOPILOT v2.5.6</h3>" +
+        "<div style='margin-bottom:8px; text-align:left;'><label style='font-size:9px;color:#aaa;'>Groq API Key:</label><br>" +
+        "<input id='vnr-groq-key' type='password' value='" + groqApiKey + "' style='background:#111;color:#fff;border:1px solid #333;font-size:10px;width:100%;box-sizing:border-box;padding:4px;border-radius:4px;margin-top:2px;' placeholder='Enter Groq API Key...' /></div>" +
         "<button id='vnr-autopilot-btn' class='vnr-x-btn' style='background:#24243e; border:1px solid #00ffff; color:#00ffff;'>Autopilot (OFF)</button>" +
         "<button id='vnr-hunter-btn' class='vnr-x-btn' style='background:#1da1f2; color:#fff;'>Go to X Search Feed</button>" +
-        "<div id='vnr-x-status' class='vnr-x-status'>Autopilot inactive. Click \"Go to X Search Feed\" then toggle Autopilot ON.</div>";
+        "<div id='vnr-x-status' class='vnr-x-status'>Autopilot inactive. Enter Groq API Key, Click \"Go to X Search Feed\" then toggle Autopilot ON.</div>";
 
     let autopilotInterval = null;
     let processedTweets = JSON.parse(localStorage.getItem('vnr_processed_tweets') || '[]');
@@ -63,6 +65,14 @@
     let isLoopRunning = false; // Mutex to prevent concurrent executions of the scanning loop
 
     // Bind event listeners using capturing mode (true) and stopPropagation to bypass X.com intercepts
+    const groqKeyInput = panel.querySelector('#vnr-groq-key');
+    if (groqKeyInput) {
+        groqKeyInput.addEventListener('input', function() {
+            groqApiKey = groqKeyInput.value.trim();
+            localStorage.setItem('vnr-groq-api-key', groqApiKey);
+        });
+    }
+
     const autopilotBtn = panel.querySelector('#vnr-autopilot-btn');
     if (autopilotBtn) {
         autopilotBtn.addEventListener('click', function(e) {

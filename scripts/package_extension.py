@@ -4,7 +4,7 @@ import zipfile
 import json
 from PIL import Image
 
-ext_dir = r"c:\Users\ovjup\Desktop\SUNO REVERSE ENGINEERING!\vnr_mud_kutter"
+ext_dir = r"c:\Users\ovjup\Desktop\SUNO REVERSE ENGINEERING!\suno_enhanced"
 
 # 1. Clean directory
 if os.path.exists(ext_dir):
@@ -30,7 +30,7 @@ except Exception as e:
 # 3. Write manifest.json with declarativeNetRequest and background service worker
 manifest = {
     "manifest_version": 3,
-    "name": "VNR MUD-KUTTER",
+    "name": "Suno-Enhanced",
     "version": "1.1.0",
     "description": "Autonomous browser engine for Suno.com quality optimization and telemetry shielding.",
     "icons": {
@@ -89,7 +89,7 @@ shutil.copy2(suno_src, suno_dest)
 print("suno_automation.js written.")
 
 # 7. Zip the extension folder
-zip_path = r"c:\Users\ovjup\Desktop\SUNO REVERSE ENGINEERING!\vnr_mud_kutter.zip"
+zip_path = r"c:\Users\ovjup\Desktop\SUNO REVERSE ENGINEERING!\suno_enhanced.zip"
 with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
     for root, dirs, files in os.walk(ext_dir):
         for file in files:

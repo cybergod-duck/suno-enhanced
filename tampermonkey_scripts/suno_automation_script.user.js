@@ -523,7 +523,7 @@
             <polyline points="15 18 9 12 15 6"></polyline>
         </svg>
     `;
-    toggleBtn.title = 'Open MUD-KUTTER Assistant';
+    toggleBtn.title = 'Open Suno-Enhanced Assistant';
 
     // Create Panel element
     const panel = document.createElement('div');
@@ -532,7 +532,7 @@
     panel.innerHTML = `
         <div class="vnr-drawer-header">
             <div class="vnr-brand-group">
-                <span class="vnr-title">MUD-KUTTER</span>
+                <span class="vnr-title">Suno-Enhanced</span>
                 <span class="vnr-version">v4.0.0</span>
             </div>
             <button id="vnr-close-btn" class="vnr-close-circle" title="Close Panel">×</button>

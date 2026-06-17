@@ -7,7 +7,7 @@ The actual web-serving copies need to go in:
 
 Files needed:
 - before.mp3  → raw Suno output (no VNR method applied)
-- after.mp3   → same concept run through MUD-KUTTER 6-step pipeline
+- after.mp3   → same concept run through Suno-Enhanced 6-step pipeline
 
 The website's A/B player is already wired:
 - BEFORE → /before.mp3
