@@ -1,0 +1,50 @@
+# Suno 0.01-Second Extension Technique
+
+## Overview
+A documented method for iteratively refining Suno AI song generations by starting extensions from the 0.01-second mark, then layering covers and remasters to progressively improve output quality.
+
+---
+
+## Step-by-Step Workflow (10 Iterations)
+
+### Phase 1: Foundation
+**Step 0 — Create Initial Song**
+- Start a new song in Suno with your desired lyrics, mood, and genre.
+- Suno generates the initial track as your foundation.
+
+### Phase 2: Expansion
+**Step 1 — Extend from 0:01**
+- Use the Extend feature, choosing to extend from the 0:01 second mark of your track.
+- Suno generates a new section based on that fragment.
+
+**Step 2 — Combine**
+- Merge the extended "Part 2" with the original track to create a unified whole.
+
+### Phase 3: Refinement
+**Steps 3–6 — Cover Iterations (4 passes)**
+- Run the combined track through 4 cover iterations.
+- Each pass refines vocals, instrumentation, and production quality.
+- Goal: improved coherence and sonic quality.
+
+### Phase 4: Final Polish
+**Steps 7–10 — Remaster Phase (4 passes)**
+- Apply remastering to the refined track.
+- Each pass fine-tunes details toward the desired final output.
+
+---
+
+## Why This Works
+
+| Principle | Effect |
+|-----------|--------|
+| **Minimal-seed expansion** | Extending from 0:01 forces creative generation from minimal input |
+| **Combine step** | Ensures structural coherence between sections |
+| **Cover iterations** | Refines production quality across multiple passes |
+| **Remaster chain** | Progressively polishes toward final output quality |
+
+---
+
+## Notes
+- Each generation consumes credits. Budget accordingly based on your subscription tier.
+- Results vary by model version (v4, v5) and prompt quality.
+- This method was discovered through iterative experimentation with Suno's cover/extend/remix pipeline.

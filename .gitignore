@@ -1,0 +1,24 @@
+# Ignore audio and compressed files
+*.mp3
+*.wav
+*.zip
+*.lnk
+
+# Python cache and venv
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+env/
+
+# Environment variables
+.env
+*.env
+
+# IDE and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

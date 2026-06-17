@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "VNR MUD-KUTTER",
+  "version": "1.1.0",
+  "description": "Autonomous browser engine for Suno.com quality optimization and telemetry shielding.",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://suno.com/*",
+        "https://www.suno.com/*"
+      ],
+      "js": [
+        "suno_automation.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "declarativeNetRequest"
+  ],
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "ruleset_1",
+        "enabled": true,
+        "path": "rules.json"
+      }
+    ]
+  }
+}

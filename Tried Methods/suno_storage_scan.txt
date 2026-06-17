@@ -1,0 +1,278 @@
+﻿
+=== Comet ===
+Base: C:\Users\ovjup\AppData\Local\Perplexity\Comet\User Data\Default
+
+  IndexedDB directories:
+  All IndexedDB origins:
+    chrome-extension_aeblfdkhhhdcdjpifhhbdiojplfjncoa_0.indexeddb.leveldb
+    chrome-extension_egjidjbpglichdcondbcbdnbeeppgdph_0.indexeddb.leveldb
+    https_account.proton.me_0.indexeddb.blob
+    https_account.proton.me_0.indexeddb.leveldb
+    https_account.wps.com_0.indexeddb.leveldb
+    https_accounts.x.ai_0.indexeddb.leveldb
+    https_accounts.zoho.com_0.indexeddb.leveldb
+    https_ads.pinterest.com_0.indexeddb.leveldb
+    https_airtable.com_0.indexeddb.leveldb
+    https_app.clipchamp.com_0.indexeddb.leveldb
+    https_app.netlify.com_0.indexeddb.leveldb
+    https_app.portkey.ai_0.indexeddb.leveldb
+    https_app.proof.com_0.indexeddb.leveldb
+    https_app.retable.io_0.indexeddb.leveldb
+    https_app.speechify.com_0.indexeddb.leveldb
+    https_app.tuta.com_0.indexeddb.leveldb
+    https_apps.docusign.com_0.indexeddb.leveldb
+    https_auth.services.adobe.com_0.indexeddb.leveldb
+    https_automatic-capybara-4j977jjx6wjjh7p9q.github.dev_0.indexeddb.leveldb
+    https_bookish-giggle-7v499vvgw7gv3wrvq.github.dev_0.indexeddb.leveldb
+    https_business.pinterest.com_0.indexeddb.leveldb
+    https_cd282495464c4f81bf84e2ef3974e6f6.perchance.org_0.indexeddb.leveldb
+    https_chatgpt.com_0.indexeddb.leveldb
+    https_clickup.com_0.indexeddb.leveldb
+    https_clipdrop.co_0.indexeddb.leveldb
+    https_console.x.ai_0.indexeddb.leveldb
+    https_crispy-yodel-v67vv66xw6453667x.github.dev_0.indexeddb.leveldb
+    https_cuddly-lamp-r4vgg44jw7rwcp97j.github.dev_0.indexeddb.leveldb
+    https_curly-space-trout-7v499vvgwrgjfpwrw.github.dev_0.indexeddb.leveldb
+    https_darknessporn.com_0.indexeddb.leveldb
+    https_dash.cloudflare.com_0.indexeddb.leveldb
+    https_dash.partnerstack.com_0.indexeddb.leveldb
+    https_dashboard.stripe.com_0.indexeddb.leveldb
+    https_developer.chrome.com_0.indexeddb.leveldb
+    https_developers.google.com_0.indexeddb.leveldb
+    https_discord.com_0.indexeddb.leveldb
+    https_docs.cloud.google.com_0.indexeddb.leveldb
+    https_docs.google.com_0.indexeddb.leveldb
+    https_docs.stripe.com_0.indexeddb.leveldb
+    https_docs.x.ai_0.indexeddb.leveldb
+    https_drive.google.com_0.indexeddb.blob
+    https_drive.google.com_0.indexeddb.leveldb
+    https_elevenlabs.io_0.indexeddb.blob
+    https_elevenlabs.io_0.indexeddb.leveldb
+    https_fantastic-fortnight-5gpqqggw55xq2764x.github.dev_0.indexeddb.leveldb
+    https_firebase.google.com_0.indexeddb.leveldb
+    https_ftlofs1.kraken.com_0.indexeddb.leveldb
+    https_github.com_0.indexeddb.leveldb
+    https_github.dev_0.indexeddb.blob
+    https_github.dev_0.indexeddb.leveldb
+    https_glorious-chainsaw-7v499vvgwwp9f9x.github.dev_0.indexeddb.leveldb
+    https_grok.com_0.indexeddb.leveldb
+    https_groq.com_0.indexeddb.leveldb
+    https_gumroad.com_0.indexeddb.leveldb
+    https_humble-space-tribble-4j977jjx6w762vq5.github.dev_0.indexeddb.leveldb
+    https_imgur.com_0.indexeddb.leveldb
+    https_knowledge.workspace.google.com_0.indexeddb.leveldb
+    https_kome.ai_0.indexeddb.leveldb
+    https_labs.google_0.indexeddb.leveldb
+    https_limewire.com_0.indexeddb.leveldb
+    https_linangdata.com_0.indexeddb.leveldb
+    https_literate-happiness-x5qww55jxxx9fvv4v.github.dev_0.indexeddb.leveldb
+    https_login.yahoo.com_0.indexeddb.leveldb
+    https_mail.google.com_0.indexeddb.leveldb
+    https_mail.proton.me_0.indexeddb.blob
+    https_mail.proton.me_0.indexeddb.leveldb
+    https_mail.yahoo.com_0.indexeddb.leveldb
+    https_mail.zoho.com_0.indexeddb.leveldb
+    https_mailadmin.zoho.com_0.indexeddb.leveldb
+    https_medium.com_0.indexeddb.leveldb
+    https_meet.google.com_0.indexeddb.leveldb
+    https_mercury.com_0.indexeddb.leveldb
+    https_murf.ai_0.indexeddb.leveldb
+    https_musicgroup.ai_0.indexeddb.leveldb
+    https_my.eyezy.com_0.indexeddb.leveldb
+    https_nsfgov.my.site.com_0.indexeddb.leveldb
+    https_odysee.com_0.indexeddb.leveldb
+    https_ominous-xylophone-x5qww55jxpp4hq9p.github.dev_0.indexeddb.leveldb
+    https_open.spotify.com_0.indexeddb.blob
+    https_open.spotify.com_0.indexeddb.leveldb
+    https_openrouter.ai_0.indexeddb.blob
+    https_openrouter.ai_0.indexeddb.leveldb
+    https_orange-computing-machine-5gpqqggw5vrjhp755.github.dev_0.indexeddb.leveldb
+    https_orange-disco-wrj77rrwxvr4f5xjv.github.dev_0.indexeddb.leveldb
+    https_ovs-activity.wps.com_0.indexeddb.leveldb
+    https_pass.proton.me_0.indexeddb.blob
+    https_pass.proton.me_0.indexeddb.leveldb
+    https_perchance.org_0.indexeddb.leveldb
+    https_platform.deepseek.com_0.indexeddb.leveldb
+    https_portal.azure.com_0.indexeddb.leveldb
+    https_poshmark.com_0.indexeddb.leveldb
+    https_potential-spoon-697gg99jw9qrhr95r.github.dev_0.indexeddb.leveldb
+    https_printify.com_0.indexeddb.leveldb
+    https_pro.kraken.com_0.indexeddb.blob
+    https_pro.kraken.com_0.indexeddb.leveldb
+    https_redditinc.com_0.indexeddb.leveldb
+    https_redesigned-yodel-pjqrrjjx9wx6h5v6.github.dev_0.indexeddb.leveldb
+    https_replit.com_0.indexeddb.leveldb
+    https_secure.ssa.gov_0.indexeddb.leveldb
+    https_shiny-goggles-q7gqq77w6979c97xv.github.dev_0.indexeddb.leveldb
+    https_signup.mail.com_0.indexeddb.leveldb
+    https_soloist.ai_0.indexeddb.leveldb
+    https_store.zoho.com_0.indexeddb.leveldb
+    https_studio.youtube.com_0.indexeddb.blob
+    https_studio.youtube.com_0.indexeddb.leveldb
+    https_stunning-acorn-4j977jjx6vv4fjpxr.github.dev_0.indexeddb.leveldb
+    https_stunning-winner-r4vgg44jw654fxrwp.github.dev_0.indexeddb.leveldb
+    https_supabase.com_0.indexeddb.leveldb
+    https_super-duper-space-halibut-v67vv66xwrp6cp7jr.github.dev_0.indexeddb.leveldb
+    https_support.poshmark.com_0.indexeddb.leveldb
+    https_supreme-space-carnival-v67vv66xw6w527vw.github.dev_0.indexeddb.leveldb
+    https_symmetrical-eureka-wvr96p4qq9qcg57v.github.dev_0.indexeddb.leveldb
+    https_teams.live.com_0.indexeddb.leveldb
+    https_turbo-potato-697gg99jwv5xc5x49.github.dev_0.indexeddb.leveldb
+    https_turbo-space-waddle-697gg99jwrrgfx5q5.github.dev_0.indexeddb.leveldb
+    https_ubiquitous-adventure-697gg99jw4p52976.github.dev_0.indexeddb.leveldb
+    https_us2.make.com_0.indexeddb.leveldb
+    https_verbose-lamp-697gg99jwrjvf45w6.github.dev_0.indexeddb.leveldb
+    https_vercel.com_0.indexeddb.leveldb
+    https_web.miniextensions.com_0.indexeddb.leveldb
+    https_whop.com_0.indexeddb.leveldb
+    https_workplace.clickworker.com_0.indexeddb.leveldb
+    https_workplace.zoho.com_0.indexeddb.leveldb
+    https_ww.solarmovie2.com_0.indexeddb.leveldb
+    https_ww22.0123movie.net_0.indexeddb.leveldb
+    https_ww24.0123movie.net_0.indexeddb.leveldb
+    https_ww25.0123movie.net_0.indexeddb.leveldb
+    https_www.bandlab.com_0.indexeddb.blob
+    https_www.bandlab.com_0.indexeddb.leveldb
+    https_www.canva.com_0.indexeddb.leveldb
+    https_www.dropbox.com_0.indexeddb.leveldb
+    https_www.fedex.com_0.indexeddb.leveldb
+    https_www.happyscribe.com_0.indexeddb.leveldb
+    https_www.htx.com_0.indexeddb.blob
+    https_www.htx.com_0.indexeddb.leveldb
+    https_www.hubspot.com_0.indexeddb.leveldb
+    https_www.indiehackers.com_0.indexeddb.leveldb
+    https_www.kraken.com_0.indexeddb.leveldb
+    https_www.krea.ai_0.indexeddb.leveldb
+    https_www.linkedin.com_0.indexeddb.leveldb
+    https_www.mail.com_0.indexeddb.leveldb
+    https_www.make.com_0.indexeddb.leveldb
+    https_www.mcafee.com_0.indexeddb.blob
+    https_www.mcafee.com_0.indexeddb.leveldb
+    https_www.mde.tv_0.indexeddb.leveldb
+    https_www.midjourney.com_0.indexeddb.leveldb
+    https_www.mureka.ai_0.indexeddb.leveldb
+    https_www.netlify.com_0.indexeddb.leveldb
+    https_www.northwestregisteredagent.com_0.indexeddb.leveldb
+    https_www.oozelife.com_0.indexeddb.leveldb
+    https_www.paypal.com_0.indexeddb.leveldb
+    https_www.perplexity.ai_0.indexeddb.blob
+    https_www.perplexity.ai_0.indexeddb.leveldb
+    https_www.photopea.com_0.indexeddb.blob
+    https_www.photopea.com_0.indexeddb.leveldb
+    https_www.photoroom.com_0.indexeddb.leveldb
+    https_www.pinterest.com_0.indexeddb.leveldb
+    https_www.reddit.com_0.indexeddb.leveldb
+    https_www.richlandcountysc.gov_0.indexeddb.leveldb
+    https_www.sejda.com_0.indexeddb.leveldb
+    https_www.soundverse.ai_0.indexeddb.leveldb
+    https_www.spectrum.com_0.indexeddb.blob
+    https_www.spectrum.com_0.indexeddb.leveldb
+    https_www.stickermule.com_0.indexeddb.leveldb
+    https_www.truist.com_0.indexeddb.leveldb
+    https_www.udio.com_0.indexeddb.blob
+    https_www.udio.com_0.indexeddb.leveldb
+    https_www.upwork.com_0.indexeddb.blob
+    https_www.upwork.com_0.indexeddb.leveldb
+    https_www.virustotal.com_0.indexeddb.leveldb
+    https_www.xvideos.com_0.indexeddb.leveldb
+    https_www.youtube-transcript.io_0.indexeddb.leveldb
+    https_www.youtube.com_0.indexeddb.blob
+    https_www.youtube.com_0.indexeddb.leveldb
+    https_x.ai_0.indexeddb.leveldb
+    https_x.com_0.indexeddb.blob
+    https_x.com_0.indexeddb.leveldb
+    https_zapier.com_0.indexeddb.leveldb
+
+  Local Storage LevelDB files:
+    000005.ldb -- 19.65 KB
+    000259.ldb -- 2463.83 KB
+    000260.ldb -- 1437.15 KB
+    000257.log -- 0 KB
+
+  Service Worker:
+    CacheStorage
+    Database
+    ScriptCache
+  Service Worker Database files:
+    000003.log -- 169.5 KB
+    CURRENT -- 0.02 KB
+    LOCK -- 0 KB
+    LOG -- 0 KB
+    LOG.old -- 0.33 KB
+    MANIFEST-000001 -- 0.04 KB
+  ScriptCache: 153 files
+  CacheStorage subdirs:
+
+=== Edge ===
+Base: C:\Users\ovjup\AppData\Local\Microsoft\Edge\User Data\Default
+
+  IndexedDB directories:
+  All IndexedDB origins:
+    chrome-extension_dppgmdbiimibapkepcbdbmkaabgiofem_0.indexeddb.leveldb
+    chrome-extension_pibpbbbcgeakmkmhgnllkkjdgpoabdge_0.indexeddb.leveldb
+    devtools_devtools_0.indexeddb.leveldb
+
+=== Brave ===
+Base: C:\Users\ovjup\AppData\Local\BraveSoftware\Brave-Browser\User Data\Default
+
+  IndexedDB directories:
+  All IndexedDB origins:
+    https_account.proton.me_0.indexeddb.leveldb
+    https_accounts.x.ai_0.indexeddb.leveldb
+    https_developer.chrome.com_0.indexeddb.leveldb
+    https_grok.com_0.indexeddb.leveldb
+    https_lobechat.com_0.indexeddb.leveldb
+    https_mail.proton.me_0.indexeddb.leveldb
+    https_myflixerz.to_0.indexeddb.leveldb
+    https_www.mde.tv_0.indexeddb.leveldb
+    https_www.paypal.com_0.indexeddb.leveldb
+    https_www.reddit.com_0.indexeddb.leveldb
+    https_www.youtube.com_0.indexeddb.leveldb
+    https_x.com_0.indexeddb.leveldb
+
+  Local Storage LevelDB files:
+    000005.ldb -- 57.58 KB
+    000177.ldb -- 197.73 KB
+    000179.ldb -- 61.81 KB
+    000181.ldb -- 15.47 KB
+    000180.log -- 0 KB
+
+  Service Worker:
+    CacheStorage
+    Database
+    ScriptCache
+  Service Worker Database files:
+    000003.log -- 268.78 KB
+    CURRENT -- 0.02 KB
+    LOCK -- 0 KB
+    LOG -- 0 KB
+    LOG.old -- 0.36 KB
+    MANIFEST-000001 -- 0.04 KB
+  ScriptCache: 130 files
+  CacheStorage subdirs:
+
+=== Chrome ===
+Base: C:\Users\ovjup\AppData\Local\Google\Chrome\User Data\Default
+
+  IndexedDB directories:
+  All IndexedDB origins:
+    chrome-extension_aeblfdkhhhdcdjpifhhbdiojplfjncoa_0.indexeddb.leveldb
+    https_grok.com_0.indexeddb.leveldb
+    https_www.linkedin.com_0.indexeddb.leveldb
+    https_x.com_0.indexeddb.leveldb
+
+  Local Storage LevelDB files:
+    000003.ldb -- 0.12 KB
+    000004.log -- 0.02 KB
+
+  Service Worker:
+    Database
+    ScriptCache
+  Service Worker Database files:
+    000003.log -- 8.17 KB
+    CURRENT -- 0.02 KB
+    LOCK -- 0 KB
+    LOG -- 0.33 KB
+    LOG.old -- 0.33 KB
+    MANIFEST-000001 -- 0.04 KB
+  ScriptCache: 11 files

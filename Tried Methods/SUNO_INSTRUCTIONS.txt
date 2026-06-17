@@ -1,0 +1,15 @@
+New song
+Cover with no style or lyrics
+Cover with just style
+extend from this with just lyrics from 0:01
+extend from extend 1 with just style from 0:01
+extend from extend 2 with just lyrics from 0:01
+Full song From extend 3
+remix with use style and lyrics
+extend from 0:01 with both
+Full song
+cover the remix with no style
+EXTEND FROM END OF SONG WITH NOTHING
+COVER WITH JUST LYRICS
+COVER WITH MAGIC WAND STYLE
+Cover the Cover with simple style (add in vocal description)

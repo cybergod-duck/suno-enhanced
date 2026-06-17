@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suno Create Page — Cartography</title>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&f[]=cabinet-grotesk@700,800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0d0c;
+    --surface: #161513;
+    --surface-2: #1c1b18;
+    --surface-3: #242320;
+    --border: rgba(255,255,255,0.07);
+    --border-accent: rgba(255,255,255,0.13);
+    --text: #e8e6e0;
+    --text-muted: #7a7870;
+    --text-faint: #4a4844;
+    --accent: #c8a84b;
+    --accent-dim: rgba(200,168,75,0.12);
+    --accent-glow: rgba(200,168,75,0.25);
+    --green: #4fa67a;
+    --green-dim: rgba(79,166,122,0.12);
+    --blue: #5591c7;
+    --blue-dim: rgba(85,145,199,0.12);
+    --red: #c7556a;
+    --red-dim: rgba(199,85,106,0.12);
+    --purple: #9b72cf;
+    --purple-dim: rgba(155,114,207,0.12);
+    --radius: 8px;
+    --radius-lg: 14px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Satoshi', sans-serif;
+    font-size: 13px;
+    line-height: 1.5;
+    min-height: 100vh;
+    padding: 40px 32px 80px;
+  }
+
+  /* ── HEADER ── */
+  .page-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .page-header h1 {
+    font-family: 'Cabinet Grotesk', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .page-header h1 span { color: var(--accent); }
+  .page-header p {
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+  .badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 99px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    background: var(--accent-dim);
+  }
+
+  /* ── LAYOUT ── */
+  .layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .col-full { grid-column: 1 / -1; }
+
+  /* ── ZONE CARD ── */
+  .zone {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  .zone-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface-2);
+  }
+  .zone-num {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .zone-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+  }
+  .zone-tag {
+    margin-left: auto;
+    font-size: 10px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 99px;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+  }
+  .zone-body { padding: 14px 16px; }
+
+  /* ── FIELD ROW ── */
+  .field-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .field-row:last-child { border-bottom: none; }
+  .field-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .field-main { flex: 1; min-width: 0; }
+  .field-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+  .field-desc {
+    font-size: 11.5px;
+    color: var(--text-muted);
+    line-height: 1.45;
+  }
+  .field-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 5px;
+  }
+  .pill {
+    font-size: 10px;
+    font-weight: 500;
+    padding: 1px 7px;
+    border-radius: 99px;
+    letter-spacing: 0.2px;
+  }
+
+  /* COLOR VARIANTS */
+  .c-gold  { background: var(--accent-dim); color: var(--accent); border: 1px solid rgba(200,168,75,0.3); }
+  .c-green { background: var(--green-dim); color: var(--green); border: 1px solid rgba(79,166,122,0.3); }
+  .c-blue  { background: var(--blue-dim); color: var(--blue); border: 1px solid rgba(85,145,199,0.3); }
+  .c-red   { background: var(--red-dim); color: var(--red); border: 1px solid rgba(199,85,106,0.3); }
+  .c-purple{ background: var(--purple-dim); color: var(--purple); border: 1px solid rgba(155,114,207,0.3); }
+  .c-mono  { background: rgba(255,255,255,0.05); color: var(--text-muted); border: 1px solid var(--border); }
+
+  /* ZONE ACCENT COLORS */
+  .z-gold .zone-header { border-bottom-color: rgba(200,168,75,0.15); }
+  .z-gold .zone-num { background: var(--accent-dim); color: var(--accent); }
+  .z-gold .zone-title { color: var(--accent); }
+
+  .z-green .zone-header { border-bottom-color: rgba(79,166,122,0.15); }
+  .z-green .zone-num { background: var(--green-dim); color: var(--green); }
+  .z-green .zone-title { color: var(--green); }
+
+  .z-blue .zone-header { border-bottom-color: rgba(85,145,199,0.15); }
+  .z-blue .zone-num { background: var(--blue-dim); color: var(--blue); }
+  .z-blue .zone-title { color: var(--blue); }
+
+  .z-red .zone-header { border-bottom-color: rgba(199,85,106,0.15); }
+  .z-red .zone-num { background: var(--red-dim); color: var(--red); }
+  .z-red .zone-title { color: var(--red); }
+
+  .z-purple .zone-header { border-bottom-color: rgba(155,114,207,0.15); }
+  .z-purple .zone-num { background: var(--purple-dim); color: var(--purple); }
+  .z-purple .zone-title { color: var(--purple); }
+
+  .z-mono .zone-num { background: rgba(255,255,255,0.06); color: var(--text-muted); }
+  .z-mono .zone-title { color: var(--text-muted); }
+
+  /* ── TIMESTAMP RULE ── */
+  .ts-rule {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .ts-block {
+    background: var(--surface-3);
+    border-radius: var(--radius);
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+  }
+  .ts-time {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 3px;
+  }
+  .ts-label { font-size: 10.5px; color: var(--text-muted); line-height: 1.4; }
+
+  /* ── FLOW DIAGRAM ── */
+  .flow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow-x: auto;
+    padding: 4px 0;
+  }
+  .flow-step {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-shrink: 0;
+  }
+  .flow-node {
+    background: var(--surface-3);
+    border: 1px solid var(--border-accent);
+    border-radius: var(--radius);
+    padding: 7px 11px;
+    text-align: center;
+  }
+  .flow-node-n {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-faint);
+    margin-bottom: 2px;
+    letter-spacing: 0.3px;
+  }
+  .flow-node-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text);
+    white-space: nowrap;
+  }
+  .flow-node-sub {
+    font-size: 9.5px;
+    color: var(--text-muted);
+    margin-top: 2px;
+    white-space: nowrap;
+  }
+  .flow-arrow {
+    font-size: 14px;
+    color: var(--text-faint);
+    padding: 0 4px;
+  }
+  .flow-node.active { border-color: var(--accent); background: var(--accent-dim); }
+  .flow-node.active .flow-node-label { color: var(--accent); }
+
+  /* ── LEGEND ── */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 32px;
+    padding: 14px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  .legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  /* ── WARNING BOX ── */
+  .warn-box {
+    background: var(--red-dim);
+    border: 1px solid rgba(199,85,106,0.3);
+    border-radius: var(--radius);
+    padding: 9px 12px;
+    margin-top: 8px;
+    font-size: 11px;
+    color: var(--red);
+    line-height: 1.45;
+  }
+  .warn-box strong { display: block; margin-bottom: 2px; font-size: 11.5px; }
+
+  /* ── INFO BOX ── */
+  .info-box {
+    background: var(--accent-dim);
+    border: 1px solid rgba(200,168,75,0.25);
+    border-radius: var(--radius);
+    padding: 9px 12px;
+    margin-top: 8px;
+    font-size: 11px;
+    color: var(--accent);
+    line-height: 1.45;
+  }
+  .info-box strong { display: block; margin-bottom: 2px; font-size: 11.5px; }
+
+  /* ── DIVIDER ── */
+  .section-divider {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0 4px;
+  }
+  .section-divider span {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    white-space: nowrap;
+  }
+  .section-divider hr {
+    flex: 1;
+    border: none;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="badge">VNR Reference v5.5</div>
+  <h1>Suno <span>Create Page</span> — Cartography</h1>
+  <p>Every field, control, and interaction point in the Create workspace · Custom Mode only</p>
+</div>
+
+<div class="layout">
+
+  <!-- ── SECTION: INPUT FIELDS ── -->
+  <div class="section-divider col-full">
+    <span>Input Fields</span><hr>
+  </div>
+
+  <!-- LYRICS FIELD -->
+  <div class="zone z-blue">
+    <div class="zone-header">
+      <div class="zone-num">1</div>
+      <div class="zone-title">Lyrics Field</div>
+      <div class="zone-tag pill c-blue">Required</div>
+    </div>
+    <div class="zone-body">
+      <div class="field-row">
+        <div class="field-icon" style="background:var(--blue-dim);color:var(--blue);">✍</div>
+        <div class="field-main">
+          <div class="field-name">Lyric Content</div>
+          <div class="field-desc">Full song text with mandatory section tags. Must be re-pasted identically at every lyrics-bearing step (1, 5). Do NOT edit between Steps 1–3.</div>
+          <div class="field-meta">
+            <span class="pill c-blue">Tagged structure</span>
+            <span class="pill c-mono">Immutable Steps 1–3</span>
+          </div>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-icon" style="background:rgba(255,255,255,0.04);color:var(--text-faint);">🏷</div>
+        <div class="field-main">
+          <div class="field-name">Mandatory Section Tags</div>
+          <div class="field-desc">Suno reads structural tags as composition anchors. Missing or inconsistent tags = structure drift mid-track.</div>
+          <div class="field-meta">
+            <span class="pill c-mono">[Intro]</span>
+            <span class="pill c-mono">[Verse 1]</span>
+            <span class="pill c-mono">[Pre-Chorus]</span>
+            <span class="pill c-mono">[Chorus]</span>
+            <span class="pill c-mono">[Verse 2]</span>
+            <span class="pill c-mono">[Bridge]</span>
+            <span class="pill c-mono">[Outro]</span>
+          </div>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-icon" style="background:var(--red-dim);color:var(--red);">⚠</div>
+        <div class="field-main">
+          <div class="field-name">Hard Timestamp Rules</div>
+          <div class="ts-rule">
+            <div class="ts-block">
+              <div class="ts-time" style="color:var(--accent);">0:01</div>
+              <div class="ts-label">Style field ONLY — never lyrics only here. This is the style reinforcement anchor.</div>
+            </div>
+            <div class="ts-block">
+              <div class="ts-time" style="color:var(--green);">0:06</div>
+              <div class="ts-label">Lyrics ONLY — NEVER style at 0:06. This is the vocal lock point.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STYLE FIELD -->
+  <div class="zone z-gold">
+    <div class="zone-header">
+      <div class="zone-num">2</div>
+      <div class="zone-title">Style Field</div>
+      <div class="zone-tag pill c-gold">High Leverage</div>
+    </div>
+    <div class="zone-body">
+      <div class="field-row">
+        <div class="field-icon" style="background:var(--accent-dim);color:var(--accent);">🎨</div>
+        <div class="field-main">
+          <div class="field-name">Step 1 Genesis Template</div>
+          <div class="field-desc">[vocal descriptor], [delivery], upfront — [genre], [BPM], spacious mix, vocal-forward, minimalist production</div>
+          <div class="field-meta">
+            <span class="pill c-gold">≤2 instrument tokens</span>
+            <span class="pill c-gold">No genre stacking</span>
+            <span class="pill c-gold">Spatial keywords mandatory</span>
+          </div>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-icon" style="background:var(--accent-dim);color:var(--accent);">🎤</div>
+        <div class="field-main">
+          <div class="field-name">Step 5 Final Cover Template</div>
+          <div class="field-desc">warm [gender] [voice type], [delivery], clear upfront, compressed vocals — minimal [genre]</div>
+          <div class="field-meta">
+            <span class="pill c-gold">Zero instrument keywords</span>
+            <span class="pill c-gold">Vocal tokens lead</span>
+          </div>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-icon" style="background:rgba(255,255,255,0.04);color:var(--text-faint);">🔢</div>
+        <div class="field-main">
+          <div class="field-name">Token Priority Rule</div>
+          <div class="field-desc">NLP layer weights tokens at the START of the prompt most heavily. Vocal descriptors ALWAYS lead. Never bury after instrument lists.</div>
+          <div class="field-meta">
+            <span class="pill c-mono">compressed vocals</span>
+            <span class="pill c-mono">tape saturation</span>
+            <span class="pill c-mono">analog warmth</span>
+            <span class="pill c-mono">broadcast quality</span>
+            <span class="pill c-mono">spacious mix</span>
+            <span class="pill c-mono">vocal-forward</span>
+          </div>
+        </div>
+      </div>
+      <div class="info-box">
+        <strong>BLANK = Maximum Power</strong>
+        Extend @ 0:01 with blank Style = acoustic DNA lock. Forces inheritance of key, tempo, production texture. Overrides model's default context window.
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION: MODES & ACTIONS ── -->
+  <div class="section-divider col-full">
+    <span>Modes &amp; Action Controls</span><hr>
+  </div>
+
+  <!-- CUSTOM MODE TOGGLE -->
+  <div class="zone z-green">
+    <div class="zone-header">
+      <div class="zone-num">3</div>
+      <div class="zone-title">Custom Mode Toggle</div>
+      <div class="zone-tag pill c-red">Always ON</div>
+    </div>
+    <div class="zone-body">
+      <div class="field-row">
+        <div class="field-icon" style="background:var(--green-dim);color:var(--green);">⚙</div>
+        <div class="field-main">
+          <div class="field-name">Custom Mode vs. Simple Mode</div>
+          <div class="field-desc">Custom Mode exposes the Style field and section tags. Simple Mode produces uncontrolled output — never use it for production work.</div>
+          <div class="field-meta">
+            <span class="pill c-green">Custom = controlled</span>
+            <span class="pill c-red">Simple = uncontrolled</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INSTRUMENTAL TOGGLE -->
+  <div class="zone z-mono">
+    <div class="zone-header">
+      <div class="zone-num">4</div>
+      <div class="zone-title">Instrumental Toggle</div>
+      <div class="zone-tag pill c-mono">Situational</div>
+    </div>
+    <div class="zone-body">
+      <div class="field-row">
+        <div class="field-icon" style="background:rgba(255,255,255,0.04);color:var(--text-faint);">🎸</div>
+        <div class="field-main">
+          <div class="field-name">Instrumental Mode</div>
+          <div class="field-desc">Removes vocal generation. Used when building backing tracks or when applying Voices separately. Not part of the standard 6-step path.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION: ADVANCED OPTIONS ── -->
+  <div class="section-divider col-full">
+    <span>Advanced Options Panel</span><hr>
+  </div>
+
+  <!-- ADVANCED OPTIONS -->
+  <div class="zone z-purple col-full">
+    <div class="zone-header">
+      <div class="zone-num">5</div>
+      <div class="zone-title">Advanced Options</div>
+      <div class="zone-tag pill c-purple">Hidden by Default</div>
+    </div>
+    <div class="zone-body">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
+        <div class="field-row" style="flex-direction:column;gap:6px;border-bottom:none;padding:8px;background:var(--surface-2);border-radius:var(--radius);border:1px solid var(--border);">
+          <div style="font-size:11px;font-weight:700;color:var(--purple);">Audio Influence</div>
+          <div style="font-size:11px;color:var(--text-muted);">Sweet spot: 0.70–0.90. Cover/Sample only. Controls how much the source audio DNA bleeds into the generation.</div>
+          <div class="field-meta"><span class="pill c-purple">0.70–0.90</span><span class="pill c-mono">Cover / Sample</span></div>
+        </div>
+        <div class="field-row" style="flex-direction:column;gap:6px;border-bottom:none;padding:8px;background:var(--surface-2);border-radius:var(--radius);border:1px solid var(--border);">
+          <div style="font-size:11px;font-weight:700;color:var(--purple);">Style Influence</div>
+          <div style="font-size:11px;color:var(--text-muted);">Leave at default. Adjusting this has unpredictable side effects in v5.5. Only touch if you are deliberately experimenting.</div>
+          <div class="field-meta"><span class="pill c-green">Default recommended</span></div>
+        </div>
+        <div class="field-row" style="flex-direction:column;gap:6px;border-bottom:none;padding:8px;background:var(--surface-2);border-radius:var(--radius);border:1px solid var(--border);">
+          <div style="font-size:11px;font-weight:700;color:var(--purple);">Weirdness</div>
+          <div style="font-size:11px;color:var(--text-muted);">Keep LOW for conventional structure. Higher values introduce structural and melodic drift that compounds across the chain.</div>
+          <div class="field-meta"><span class="pill c-gold">Keep low</span><span class="pill c-mono">Conventional</span></div>
+        </div>
+        <div class="field-row" style="flex-direction:column;gap:6px;border-bottom:none;padding:8px;background:var(--surface-2);border-radius:var(--radius);border:1px solid var(--radius);border:1px solid var(--border);">
+          <div style="font-size:11px;font-weight:700;color:var(--purple);">Vocal Gender</div>
+          <div style="font-size:11px;color:var(--text-muted);">Use toggle instead of style field keywords. Saves precious style character count. Toggle overrides written vocal gender descriptors.</div>
+          <div class="field-meta"><span class="pill c-green">Saves style chars</span></div>
+        </div>
+        <div class="field-row" style="flex-direction:column;gap:6px;border-bottom:none;padding:8px;background:var(--surface-2);border-radius:var(--radius);border:1px solid var(--border);">
+          <div style="font-size:11px;font-weight:700;color:var(--purple);">Voices</div>
+          <div style="font-size:11px;color:var(--text-muted);">Pro/Premier. Upload 30s–4min a cappella. Controls vocal timbre, range, delivery. Locks your voice print into the generation node.</div>
+          <div class="field-meta"><span class="pill c-purple">Pro / Premier</span><span class="pill c-mono">30s–4min a cappella</span></div>
+        </div>
+        <div class="field-row" style="flex-direction:column;gap:6px;border-bottom:none;padding:8px;background:var(--surface-2);border-radius:var(--radius);border:1px solid var(--border);">
+          <div style="font-size:11px;font-weight:700;color:var(--purple);">Custom Models</div>
+          <div style="font-size:11px;color:var(--text-muted);">Pro/Premier. Requires ≥6 copyright-owned tracks. Controls composition, chord structure, style bias at the model level.</div>
+          <div class="field-meta"><span class="pill c-purple">Pro / Premier</span><span class="pill c-mono">≥6 owned tracks</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION: EXTEND / ACTION VARIANTS ── -->
+  <div class="section-divider col-full">
+    <span>Action Variants (Extend / Cover / Remaster)</span><hr>
+  </div>
+
+  <!-- EXTEND -->
+  <div class="zone z-gold">
+    <div class="zone-header">
+      <div class="zone-num">6</div>
+      <div class="zone-title">Extend</div>
+      <div class="zone-tag pill c-gold">Highest Leverage</div>
+    </div>
+    <div class="zone-body">
+      <div class="field-row">
+        <div class="field-icon" style="background:var(--accent-dim);color:var(--accent);">⏱</div>
+        <div class="field-main">
+          <div class="field-name">Extend @ 0:01 — Blank Style</div>
+          <div class="field-desc">The single highest-leverage action. Discards all context after second 1. Forces acoustic DNA inheritance: key, tempo, production texture. Overrides default context window.</div>
+          <div class="field-meta">
+            <span class="pill c-gold">Step 2 of 6-step path</span>
+            <span class="pill c-mono">Style = blank</span>
+            <span class="pill c-mono">Lyrics = identical</span>
+          </div>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-icon" style="background:var(--green-dim);color:var(--green);">🔒</div>
+        <div class="field-main">
+          <div class="field-name">Extend @ 0:06 — Vocal Lock (Optional)</div>
+          <div class="field-desc">Step 2.5. Only when Step 2 has strong instrumentals but weak vocals. Locks vocal performance. Lyrics only, style blank.</div>
+          <div class="field-meta">
+            <span class="pill c-green">Optional Step 2.5</span>
+            <span class="pill c-mono">Style = blank</span>
+            <span class="pill c-mono">Lyrics = new or identical</span>
+          </div>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-icon" style="background:rgba(255,255,255,0.04);color:var(--text-faint);">⏭</div>
+        <div class="field-main">
+          <div class="field-name">Extend from End: Nothing</div>
+          <div class="field-desc">Step 4. Both fields BLANK. v5.5 metadata re-index. Credits refunded. Must run on fully compiled Get Whole Song output — not on an uncompiled Cover.</div>
+          <div class="field-meta">
+            <span class="pill c-green">Credits refunded</span>
+            <span class="pill c-mono">Lyrics = blank</span>
+            <span class="pill c-mono">Style = blank</span>
+          </div>
+          <div class="warn-box">
+            <strong>⚠ Node Dependency Warning</strong>
+            Running end-extend on an uncompiled Cover registers an incomplete dependency tree. Stems, Voices, and v5.5 feature flags inherit from the wrong node. Always run on Get Whole Song compiled output.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COVER + REMASTER -->
+  <div class="zone z-green">
+    <div class="zone-header">
+      <div class="zone-num">7</div>
+      <div class="zone-title">Cover &amp; Remaster</div>
+      <div class="zone-tag pill c-green">Polish Layer</div>
+    </div>
+    <div class="zone-body">
+      <div class="field-row">
+        <div class="field-icon" style="background:var(--green-dim);color:var(--green);">🔇</div>
+        <div class="field-main">
+          <div class="field-name">Cover: No Style (Step 3)</div>
+          <div class="field-desc">The step most people skip. Waveform-only remaster. Strips spectral crowding, phase seams, mix compression that survive export otherwise. No prompt engineering recovers this post-download.</div>
+          <div class="field-meta">
+            <span class="pill c-green">Step 3 of 6-step path</span>
+            <span class="pill c-mono">Style = blank</span>
+            <span class="pill c-mono">Lyrics = identical</span>
+          </div>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-icon" style="background:var(--green-dim);color:var(--green);">🎙</div>
+        <div class="field-main">
+          <div class="field-name">Cover: Vocal-First Simple Style (Step 5)</div>
+          <div class="field-desc">Re-paste identical tagged lyric sheet from Step 1. Vocal-only style tokens. Sets dynamic range ceiling. Zero instrument keywords.</div>
+          <div class="field-meta">
+            <span class="pill c-green">Step 5 of 6-step path</span>
+            <span class="pill c-mono">Audio Influence: 0.70–0.90</span>
+          </div>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field-icon" style="background:var(--blue-dim);color:var(--blue);">✨</div>
+        <div class="field-main">
+          <div class="field-name">Remaster (Step 6)</div>
+          <div class="field-desc">True export ceiling. Strips synthetic HF noise and chain compression. ~5 credits, NOT refunded. Mandatory final step.</div>
+          <div class="field-meta">
+            <span class="pill c-blue">Step 6 of 6-step path</span>
+            <span class="pill c-red">~5 credits · not refunded</span>
+            <span class="pill c-gold">Mandatory</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION: 6-STEP FLOW ── -->
+  <div class="section-divider col-full">
+    <span>Optimal 6-Step Flow</span><hr>
+  </div>
+
+  <div class="zone z-gold col-full">
+    <div class="zone-header">
+      <div class="zone-num">★</div>
+      <div class="zone-title">6-Step Optimal Path — Studio Quality (~25 credits)</div>
+    </div>
+    <div class="zone-body">
+      <div class="flow">
+        <div class="flow-step">
+          <div class="flow-node active">
+            <div class="flow-node-n">STEP 1</div>
+            <div class="flow-node-label">New Song</div>
+            <div class="flow-node-sub">Custom · Vocal-first sparse</div>
+          </div>
+          <div class="flow-arrow">→</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-node">
+            <div class="flow-node-n">STEP 2</div>
+            <div class="flow-node-label">Extend @ 0:01</div>
+            <div class="flow-node-sub">Style blank · DNA lock</div>
+          </div>
+          <div class="flow-arrow">→</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-node" style="border-style:dashed;">
+            <div class="flow-node-n">STEP 2.5</div>
+            <div class="flow-node-label">Extend @ 0:06</div>
+            <div class="flow-node-sub">Optional · Vocal lock</div>
+          </div>
+          <div class="flow-arrow">→</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-node">
+            <div class="flow-node-n">STEP 3</div>
+            <div class="flow-node-label">Cover: No Style</div>
+            <div class="flow-node-sub">Waveform remaster</div>
+          </div>
+          <div class="flow-arrow">→</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-node">
+            <div class="flow-node-n">STEP 4</div>
+            <div class="flow-node-label">Extend End: Nothing</div>
+            <div class="flow-node-sub">Meta re-index · refunded</div>
+          </div>
+          <div class="flow-arrow">→</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-node">
+            <div class="flow-node-n">STEP 5</div>
+            <div class="flow-node-label">Cover: Vocal Style</div>
+            <div class="flow-node-sub">Re-paste lyrics · vocal tokens</div>
+          </div>
+          <div class="flow-arrow">→</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-node" style="border-color:var(--green);background:var(--green-dim);">
+            <div class="flow-node-n" style="color:var(--green);">STEP 6</div>
+            <div class="flow-node-label" style="color:var(--green);">Remaster</div>
+            <div class="flow-node-sub">Export ceiling · mandatory</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION: CREDIT ECONOMY ── -->
+  <div class="section-divider col-full">
+    <span>Credit Economy</span><hr>
+  </div>
+
+  <div class="zone z-mono col-full">
+    <div class="zone-header">
+      <div class="zone-num">8</div>
+      <div class="zone-title">Credit Economy</div>
+    </div>
+    <div class="zone-body">
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;">
+        <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);padding:10px;text-align:center;">
+          <div style="font-size:18px;font-weight:800;color:var(--text);font-family:'Cabinet Grotesk',sans-serif;">~5</div>
+          <div style="font-size:10px;color:var(--text-muted);margin-top:2px;">Create (2 variations)</div>
+        </div>
+        <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);padding:10px;text-align:center;">
+          <div style="font-size:18px;font-weight:800;color:var(--green);font-family:'Cabinet Grotesk',sans-serif;">Free</div>
+          <div style="font-size:10px;color:var(--text-muted);margin-top:2px;">Get Whole Song</div>
+        </div>
+        <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);padding:10px;text-align:center;">
+          <div style="font-size:18px;font-weight:800;color:var(--green);font-family:'Cabinet Grotesk',sans-serif;">Refunded</div>
+          <div style="font-size:10px;color:var(--text-muted);margin-top:2px;">Extend End: Nothing</div>
+        </div>
+        <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);padding:10px;text-align:center;">
+          <div style="font-size:18px;font-weight:800;color:var(--red);font-family:'Cabinet Grotesk',sans-serif;">~5</div>
+          <div style="font-size:10px;color:var(--text-muted);margin-top:2px;">Remaster (NOT refunded)</div>
+        </div>
+        <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);padding:10px;text-align:center;">
+          <div style="font-size:18px;font-weight:800;color:var(--accent);font-family:'Cabinet Grotesk',sans-serif;">~25</div>
+          <div style="font-size:10px;color:var(--text-muted);margin-top:2px;">Studio quality (6-step)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- LEGEND -->
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:var(--accent);"></div>High-leverage action</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--green);"></div>Positive / refunded / optional</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--blue);"></div>Required input field</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--red);"></div>Warning / cost / danger</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--purple);"></div>Advanced options (hidden panel)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--text-faint);"></div>Neutral / informational</div>
+  <div style="margin-left:auto;font-size:10px;color:var(--text-faint);">Voss Neural Research LLC · v5.5 · 2026-06-17</div>
+</div>
+
+</body>
+</html>

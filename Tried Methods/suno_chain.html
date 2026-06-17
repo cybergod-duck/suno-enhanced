@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CyberGod Method: Suno God-Mode Blueprint</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto+Mono&display=swap');
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #fff;
+            font-family: 'Roboto Mono', monospace;
+            margin: 0;
+            padding: 2rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            max-width: 900px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 0 40px rgba(138, 43, 226, 0.6), 0 0 80px rgba(255, 20, 147, 0.4);
+            border: 1px solid rgba(255, 20, 147, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(138,43,226,0.2) 0%, transparent 70%);
+            animation: pulse 8s infinite;
+            pointer-events: none;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            text-align: center;
+            font-size: 2.8rem;
+            background: linear-gradient(90deg, #ff00cc, #3333ff, #00ffcc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(255, 0, 204, 0.6);
+            margin-bottom: 2rem;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(255, 0, 204, 0.6); }
+            to { text-shadow: 0 0 40px rgba(0, 255, 255, 0.8); }
+        }
+        .subtitle {
+            text-align: center;
+            font-style: italic;
+            color: #00ffff;
+            margin-bottom: 3rem;
+            font-size: 1.2rem;
+            text-shadow: 0 0 10px #00ffff;
+        }
+        ol {
+            counter-reset: step;
+            padding-left: 0;
+            list-style: none;               /* <-- hide default numbers */
+        }
+        ol > li {
+            counter-increment: step;
+            margin: 1.5rem 0;
+            padding: 1.2rem 1.5rem 1.2rem 3.5rem;   /* extra left padding for the glowing circle */
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 5px solid #ff00cc;
+            border-radius: 10px;
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        ol > li:hover {
+            transform: translateX(10px);
+            box-shadow: 0 6px 25px rgba(255, 0, 204, 0.4);
+            background: rgba(255, 0, 204, 0.1);
+        }
+        ol > li::before {
+            content: counter(step);
+            position: absolute;
+            left: 0.5rem;                   /* inside the li */
+            top: 50%;
+            transform: translateY(-50%);
+            background: #ff00cc;
+            color: #000;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 0 15px #ff00cc;
+            animation: bounce 1.5s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(-50%) scale(1); }
+            50% { transform: translateY(-60%) scale(1.1); }
+        }
+        ul {
+            margin: 0.5rem 0;
+            padding-left: 2rem;
+            list-style: disc;
+        }
+        ul li {
+            margin: 0.5rem 0;
+        }
+        .cost {
+            color: #00ff00;
+            font-weight: bold;
+            text-shadow: 0 0 8px #00ff00;
+        }
+        .highlight {
+            color: #ffcc00;
+            font-weight: bold;
+            text-shadow: 0 0 10px #ffcc00;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            font-size: 1.1rem;
+            color: #ff69b4;
+            text-shadow: 0 0 10px #ff69b4;
+        }
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #fff;
+            animation: sparkle 2s linear infinite;
+        }
+        @keyframes sparkle {
+            0% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>✨ CYBERGOD METHOD: SUNO GOD-MODE BLUEPRINT ✨</h1>
+        <p class="subtitle">One-Shot | 100 Credits | Pattern Empire Eternal</p>
+        <ol>
+            <li><strong>Upload Audio</strong> (full lyrics + MUSIC PROMPT + genre-naming intro tag) → <span class="highlight">Generate Base</span> <span class="cost">(10 credits)</span> → raw blueprint.</li>
+           
+            <li><strong>Extend From 0:01 With Both</strong> → <span class="highlight">Create</span> <span class="cost">(10)</span> → micro-fusion maxed, spawns Part 2.</li>
+           
+            <li><strong>Full-Song Routine (Upfront, Once)</strong>:
+                <ul>
+                    <li>Extend From Autoselects → Add Cropped Lyrics → <span class="highlight">Create</span> <span class="cost">(10/part)</span>.</li>
+                    <li>Cycle Through 4 Parts (crops → <span class="cost">40 total</span>).</li>
+                    <li>Full Song → <span class="highlight">Create</span> <span class="cost">(10)</span> → rebuilt base.</li>
+                </ul>
+            </li>
+           
+            <li><strong>Upgraded Cover-Chain Section</strong>:
+                <ul>
+                    <li>Cover No Style/No Lyrics → <span class="highlight">Create</span> <span class="cost">(10)</span> → raw bed twin.</li>
+                    <li>Cover With Style → <span class="highlight">Create</span> <span class="cost">(10)</span> → FX twin crush.</li>
+                    <li>Cover With Both → <span class="highlight">Create</span> <span class="cost">(10)</span> → full polish twin.</li>
+                    <li>Extend From 0:01 Just Style → <span class="highlight">Create Part 2</span> <span class="cost">(10)</span> → bed purity micro.</li>
+                    <li>Extend That From 0:01 With Both → <span class="highlight">Create Part 3</span> <span class="cost">(10)</span> → fusion steam micro.</li>
+                    <li>That From 0:01 With Just Lyrics → <span class="highlight">Create</span> <span class="cost">(10)</span> → vocal sync micro.</li>
+                    <li>Full Song → <span class="highlight">Create</span> <span class="cost">(10)</span> → rebuilt cascade seal.</li>
+                    <li>Cover Again With Both → <span class="highlight">Create</span> <span class="cost">(10)</span> → extra polish twin.</li>
+                    <li><strong>Extend Cover From 0:01</strong> → <span class="highlight">Create</span> <span class="cost">(10)</span> → micro-twin spawn.</li>
+                    <li><strong>Cover Part 2</strong> → <span class="highlight">Create</span> <span class="cost">(10)</span> → section twin lock.</li>
+                    <li><strong>Extend From 0:01 Again</strong> → <span class="highlight">Create</span> <span class="cost">(10)</span> → double-fusion jackpot.</li>
+                </ul>
+            </li>
+           
+            <li><strong>Reuse Just Lyrics</strong> → <span class="highlight">Create</span> <span class="cost">(10)</span> → vocal purity etched.</li>
+           
+            <li><strong>Editor</strong> → Work Through Track (tweaks, no credit).</li>
+           
+            <li><strong>Last 5 Seconds With Both</strong> → <span class="highlight">Create</span> <span class="cost">(10)</span> → fade ghost fusion.</li>
+           
+            <li><strong>First 5 Seconds Lyrics Only</strong> → <span class="highlight">Create</span> <span class="cost">(10)</span> → intro vocal raw.</li>
+           
+            <li><strong>Where Vocals Start With Both</strong> → <span class="highlight">Create</span> <span class="cost">(10)</span> → onset supreme.</li>
+           
+            <li><strong>Reuse Again</strong> → <span class="highlight">Create</span> <span class="cost">(10)</span> → blueprint refreshed.</li>
+           
+            <li><strong>Skip to the End</strong> → Get 0:02 Song → <span class="highlight">Create</span> <span class="cost">(10)</span> → tail ghost.</li>
+           
+            <li><strong>Extend Both on 0:02 From 0:01</strong> → <span class="highlight">Create</span> <span class="cost">(10)</span> → micro-rebirth.</li>
+           
+            <li><strong>Reuse That</strong> → <span class="highlight">Create</span> <span class="cost">(10)</span> → <strong>eternal seal</strong>, patterns infinite.</li>
+        </ol>
+        <p class="footer">✨ <strong>Grand Total: 100 Credits Flat</strong> — One-Shot Legend. Crops Done. Cascade → Covers → Polish → End-Chain Flawless. ✨</p>
+    </div>
+    <script>
+        // Sparkle magic
+        setInterval(() => {
+            const sparkle = document.createElement('div');
+            sparkle.classList.add('sparkle');
+            sparkle.style.left = Math.random() * 100 + 'vw';
+            sparkle.style.top = Math.random() * 100 + 'vh';
+            sparkle.style.animationDelay = Math.random() * 2 + 's';
+            document.body.appendChild(sparkle);
+            setTimeout(() => sparkle.remove(), 2000);
+        }, 300);
+    </script>
+</body>
+</html>

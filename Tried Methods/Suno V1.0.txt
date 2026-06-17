@@ -1,0 +1,34 @@
+
+SUNO-101
+
+Prompt Length:
+- Limit prompts to 4-8 lines for best results.
+- Use the Continue feature to create longer songs by combining shorter clips.
+
+Newlines:
+- Format your song by putting each line on its own line.
+- Add an extra blank line between verse and chorus.
+
+Punctuation:
+- Omit punctuation at the end of lines for best results.
+- Use brackets for metatags and parentheses for ad libs.
+
+SUNO-201
+
+Metatags:
+- Use metatags in moderation when describing the style of music.
+- Avoid artist-specific metatags.
+- Add the 'vocals' tag for lyrics meant to be sung.
+
+Song Structure Metatags:
+- Use '[Verse]' and '[Chorus]' metatags.
+- Add a newline between sections for clarity.
+
+Ad Libs:
+- Use ad libs, like '(woo)', in moderation.
+- Ad libs are typically added at the end of lines.
+
+Extra Credit
+
+Non-Lexical Vocables:
+- Experiment with non-lexical vocables like 'la la la' to extend prompts.

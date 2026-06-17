@@ -1,0 +1,20 @@
+Normalize:ApplyVolume="1" PeakLevel="-1" RemoveDcOffset="1" StereoIndependent="0"
+De-ess:Use_Preset="<Current Settings>"
+Compress:Use_Preset="<Current Settings>"
+ProEq:Use_Preset="<Current Settings>"
+Reverb:Delay="20" DryGain="0" HfDamping="50" Reverberance="40" RoomSize="30" StereoWidth="60" ToneHigh="60" ToneLow="40" WetGain="-6" WetOnly="0"
+Duplicate:
+ShiftDown:
+SelNextClip:
+ChangePitch:Percentage="-20" SBSMS="0"
+Amplify:Ratio="0.50118723"
+SelectAll:
+MixAndRenderToNewTrack:
+LastTrack:
+SelTrackStartToEnd:
+TrackSolo:
+Limiter:Use_Preset="User Preset:suno"
+Delete:
+LastTrack:
+SelTrackStartToEnd:
+TrackMoveTop:

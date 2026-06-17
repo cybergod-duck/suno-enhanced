@@ -1,0 +1,91 @@
+﻿
+==============================================
+SYSTEM-WIDE SUNO TRACKER SWEEP
+Date: 2026-03-06 03:26:32
+==============================================
+
+=== 1. DNS CACHE ===
+  No Suno/tracker domains in DNS cache (may have been flushed)
+
+=== 2. CREDENTIAL MANAGER ===
+  No Suno credentials stored
+
+=== 3. REGISTRY: URL HANDLERS & ASSOCIATIONS ===
+  Registry scan complete
+
+=== 4. RECENT FILES ===
+  COMET_SUNO_FORENSIC_PROFILE.md.lnk - 03/06/2026 03:15:07
+  Mr. Suno+.json.lnk - 03/05/2026 22:36:11
+  Suno 0_01 Extend Cover Trick.pdf.lnk - 03/05/2026 19:44:05
+  Suno AI Song Creation Optimization.pdf.lnk - 03/05/2026 23:08:23
+  SUNO GOD MODE 2025.mp4.lnk - 03/05/2026 23:37:44
+  SUNO INVINCIBLE.pdf.lnk - 03/06/2026 01:07:31
+  Suno Research.lnk - 03/06/2026 03:15:08
+  Suno Workflows.pdf.lnk - 03/05/2026 21:19:38
+  SUNO.html.lnk - 03/05/2026 20:12:02
+  SUNO.lnk - 03/06/2026 02:48:57
+  SUNO.pdf.lnk - 03/05/2026 21:27:42
+  SUNO2.pdf.lnk - 03/05/2026 19:19:31
+  SUNOINVINCIBLE.HTML.lnk - 03/05/2026 22:09:01
+  suno_chain.html.lnk - 03/05/2026 21:13:10
+  SUNO_LIVE_PIPELINE_SESSION.md.lnk - 03/06/2026 01:52:36
+  SUNO_QUARANTINE.zip.lnk - 03/06/2026 03:26:00
+  SUNO_TRACKER_ENCYCLOPEDIA.md.lnk - 03/06/2026 02:54:31
+  SUNO_TRACKER_ENCYCLOPEDIA.md.resolved.lnk - 03/06/2026 02:46:03
+  SUNO_UI_MAP.md.lnk - 03/05/2026 23:59:24
+  Technical Analysis of SUNO.pdf.lnk - 03/05/2026 20:08:17
+
+=== 5. DOWNLOADS FOLDER ===
+  mister.duck._Eye-catching_banner_design_for_Suno_AI_Mastery_p_0251dcb3-bcef-4513-b157-0926b110cddb_3.png - 1446.2 KB - 10/05/2025 01:41:17
+  The Suno Casino .mp3 - 7791.4 KB - 10/05/2025 00:10:52
+
+=== 6. APPDATA - SUNO ARTIFACTS ===
+
+=== 7. TEMP FILES ===
+  Temp scan complete
+
+=== 8. ACTIVITY HISTORY ===
+  Activity History scan complete
+
+=== 9. CLIPBOARD HISTORY ===
+  Clipboard scan complete
+
+=== 10. NOTIFICATION CACHE ===
+  Notification scan complete
+
+=== 11. FONT CACHE ===
+  No Suno fonts
+
+=== 12. PWA / WEB APP INSTALLS ===
+  PWA scan complete
+
+=== 13. HOSTS FILE ===
+  No Suno entries in hosts file
+
+=== 14. PREFETCH ===
+  No Suno prefetch entries
+
+=== 15. THUMBNAIL CACHE ===
+  Thumbnail cache total: 51.4 MB (15 files)
+  (May contain cached Suno album art thumbnails - cannot search without parsing)
+
+=== 16. FLASH LSOs (LEGACY) ===
+  Flash LSO scan complete
+
+=== 17. ISOLATED CHROMIUM PROFILE ===
+  Isolated Chromium profile exists: 1113.51 MB
+  SUNO in isolated profile LS: 000056.ldb
+  SUNO in isolated profile LS: 000058.ldb
+  SUNO in isolated profile LS: 000060.ldb
+
+=== 18. WEBCACHE (SYSTEM WEBVIEW) ===
+  WebCache folder: 76 MB
+  WebCache scan complete
+
+=== 19. WINDOWS SEARCH INDEX ===
+
+=== 20. DROPBOX CACHE ===
+
+==============================================
+SYSTEM SWEEP COMPLETE: 2026-03-06 03:26:38
+==============================================

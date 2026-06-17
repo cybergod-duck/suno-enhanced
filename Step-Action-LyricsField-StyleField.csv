@@ -1,0 +1,7 @@
+"Step","Action","Lyrics Field","Style Field"
+"1","Generate (Custom)","Full tagged lyrics","Full style string"
+"2","Extend @ 0:01","RE-PASTE exact tagged lyrics","BLANK"
+"2.5","Extend @ 0:06 (optional vocal lock)","Lyrics only","BLANK"
+"3","No-Style Cover","RE-PASTE exact tagged lyrics","BLANK"
+"4","End-Extend re-index (compiled file only)","RE-PASTE","BLANK"
+"5","Remaster","—","—"
