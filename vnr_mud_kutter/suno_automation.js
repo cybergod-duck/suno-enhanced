@@ -258,7 +258,7 @@
             flex-direction: column !important;
             gap: 1px !important;
             margin-bottom: 8px !important;
-            overflow-y: auto !important;
+            overflow-y: hidden !important;
             margin-left: -14px !important;
             margin-right: -14px !important;
             padding-right: 0 !important;
@@ -284,13 +284,14 @@
             border-left: 5px solid transparent !important;
             border-right: none !important;
             border-radius: 0 !important;
-            padding: 12px 18px !important;
+            padding: 8px 18px !important;
             display: flex !important;
             align-items: center !important;
             gap: 14px !important;
             cursor: pointer !important;
             transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1) !important;
             position: relative !important;
+            flex: 1 1 0% !important;
         }
         .vnr-step-item:hover {
             background: rgba(255, 255, 255, 0.04) !important;
