@@ -476,7 +476,7 @@
 
     // Step definitions matching actual pipeline
     const steps = [
-        { num: 1, title: "1. Genesis Base", desc: "Local optimize or LILA lyrics + style. Save to vault.", actionText: "Optimize & Create Genesis" },
+        { num: 1, title: "1. Genesis Base", desc: "Local optimize or NUSO lyrics + style. Save to vault.", actionText: "Optimize & Create Genesis" },
         { num: 2, title: "2. DNA Lock (Extend @ 0:01)", desc: "Extend @ 0:01. Clear style, re-paste lyrics.", actionText: "Execute Extend @ 0:01" },
         { num: 3, title: "2.5 Vocal Lock (Optional 0:06)", desc: "Extend @ 0:06. Clear style, re-paste lyrics.", actionText: "Execute Extend @ 0:06" },
         { num: 4, title: "3. Cover (No Style)", desc: "Restore lyrics, blank style. Waveform polish.", actionText: "Execute Cover: No Style" },
