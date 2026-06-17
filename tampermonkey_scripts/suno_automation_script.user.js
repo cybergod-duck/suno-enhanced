@@ -224,8 +224,9 @@
             box-sizing: border-box !important;
         }
         .vnr-textarea {
-            height: 38px !important;
-            resize: none !important;
+            height: 80px !important;
+            resize: vertical !important;
+            overflow-y: auto !important;
         }
         .vnr-btn-row {
             display: flex !important;
@@ -563,7 +564,7 @@
             <div class="vnr-collapsible-content" id="vnr-vault-content">
                 <div class="vnr-field-group">
                     <label class="vnr-label">SAVED STYLE</label>
-                    <input class="vnr-input" id="vnr-vault-style" type="text" placeholder="No style saved yet" />
+                    <textarea class="vnr-input vnr-textarea" id="vnr-vault-style" placeholder="No style saved yet"></textarea>
                 </div>
                 <div class="vnr-field-group">
                     <label class="vnr-label">SAVED LYRICS</label>

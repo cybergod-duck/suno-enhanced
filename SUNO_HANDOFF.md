@@ -19,42 +19,16 @@ NEXT SCAN TRIGGER: Manual or on degraded output report
 
 ## 🔴 OPEN BUG — ACTION REQUIRED (AG)
 
-### VNR-BUG-002 — Vault UI Truncates Lyrics & Style Visually
-**File:** `tampermonkey_scripts/suno_automation_script.user.js`
-**Status:** OPEN — Patch pending
-**Note:** localStorage data is NOT corrupted. This is a visual/UI truncation only — but it creates a false impression of cropped saves and risks partial edits from the user.
-
-#### BUG-002a — Lyrics textarea too short (CSS)
-**Location:** `.vnr-textarea` CSS class
-```css
-/* CURRENT (broken) */
-.vnr-textarea {
-    height: 38px !important;   /* clips to ~2 lines */
-    resize: none !important;
-}
-
-/* FIX */
-.vnr-textarea {
-    height: 80px !important;
-    resize: vertical !important;
-    overflow-y: auto !important;
-}
-```
-
-#### BUG-002b — Style vault field is `<input>`, can't show multi-line prompts
-**Location:** Panel HTML, `#vnr-vault-style`
-```html
-<!-- CURRENT (broken) -->
-<input class="vnr-input" id="vnr-vault-style" type="text" placeholder="No style saved yet" />
-
-<!-- FIX -->
-<textarea class="vnr-input vnr-textarea" id="vnr-vault-style" placeholder="No style saved yet"></textarea>
-```
-No logic changes needed — the existing `oninput` handler already uses `.value` which works on both `<input>` and `<textarea>`.
+None.
 
 ---
 
 ## ✅ CLOSED BUGS
+
+### VNR-BUG-002 — Vault UI Truncates Lyrics & Style Visually
+**File:** `tampermonkey_scripts/suno_automation_script.user.js`
+**Status:** CLOSED — Patched by AG 2026-06-17
+**Summary:** CSS height of 38px clipped saved lyrics visually, and style field was a single-line input. Fixed: style field updated to `<textarea>` and both inputs styled to `80px` height with vertical resizing and auto vertical scrollbars.
 
 ### VNR-BUG-001 — runGenesis() Crops Style After 3 Tokens + Double-Wraps Lyrics
 **File:** `tampermonkey_scripts/suno_automation_script.user.js`
@@ -179,6 +153,7 @@ Must run on a **Get Whole Song compiled output**. Running on an uncompiled Cover
 | 2026-06-17 | Robust mode-select & element polling implemented | AG | Fixed Extend mode auto-selection via direct tab clicks, scoped element searches, glyph-stripping, and waitForElement polling. Zipped & pushed to GitHub. |
 | 2026-06-17 | Fixed runGenesis prompt cropping bugs (VNR-BUG-001) | AG | Updated runGenesis to use prompts and lyrics exactly as-is without token reconstruction or wrapping. Zipped & pushed to GitHub. |
 | 2026-06-17 | VNR-BUG-002 diagnosed | Perplexity | Vault textarea 38px CSS clips lyrics visually; style field is <input> and can't show multi-line prompts. localStorage intact. Two-line CSS+HTML fix documented. Awaiting AG patch. |
+| 2026-06-17 | VNR-BUG-002 patched | AG | Applied style dropdown input to textarea and 80px resizable CSS height fix for both fields. Zipped & pushed to GitHub. |
 
 ---
 
