@@ -474,15 +474,15 @@
         }
     `;
 
-    // Step definitions matching actual pipeline
+    // Step definitions - user-facing only, NO technical detail exposed
     const steps = [
-        { num: 1, title: "1. Genesis Base", desc: "Local optimize or NUSO lyrics + style. Save to vault.", actionText: "Optimize & Create Genesis" },
-        { num: 2, title: "2. DNA Lock (Extend @ 0:01)", desc: "Extend @ 0:01. Clear style, re-paste lyrics.", actionText: "Execute Extend @ 0:01" },
-        { num: 3, title: "2.5 Vocal Lock (Optional 0:06)", desc: "Extend @ 0:06. Clear style, re-paste lyrics.", actionText: "Execute Extend @ 0:06" },
-        { num: 4, title: "3. Cover (No Style)", desc: "Restore lyrics, blank style. Waveform polish.", actionText: "Execute Cover: No Style" },
-        { num: 5, title: "4. Stitch Whole Song", desc: "Guide: Click 'Get Whole Song' in track options.", actionText: "Stitch Whole Song" },
-        { num: 6, title: "5. Cover (Style + Lyrics)", desc: "Restore original style & lyrics. Cover pass.", actionText: "Execute Cover (Style+Lyrics)" },
-        { num: 7, title: "6. Remaster (Ceiling)", desc: "Configure Remaster: Model v5.5, Normal strength.", actionText: "Configure Remaster" }
+        { num: 1, title: "Step 1 — Start Your Song", desc: "Get lyrics + style from NUSO. Paste in, then click.", actionText: "▶ Create Step 1" },
+        { num: 2, title: "Step 2 — Pick Best Take & Click", desc: "Listen. Select the best version. Hit the button.", actionText: "▶ Create Step 2" },
+        { num: 3, title: "Step 2.5 — Optional Vocal Pass", desc: "Skip if happy. Or click for a tighter vocal lock.", actionText: "▶ Optional Vocal Pass" },
+        { num: 4, title: "Step 3 — Click to Polish", desc: "Select best take. Click. Let it work.", actionText: "▶ Create Step 3" },
+        { num: 5, title: "Step 4 — Stitch the Full Song", desc: "Select best take. Click 'Get Whole Song' when ready.", actionText: "▶ Stitch Whole Song" },
+        { num: 6, title: "Step 5 — Final Pass", desc: "Select best take. Click. Almost done.", actionText: "▶ Create Step 5" },
+        { num: 7, title: "Step 6 — Ceiling Pass ✨", desc: "Last click. This is the ceiling. Select your master.", actionText: "▶ Final Ceiling Pass" }
     ];
 
     // Global states
