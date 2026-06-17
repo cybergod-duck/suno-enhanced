@@ -47,6 +47,8 @@ We have eliminated manual vault controls:
 - **Hold Back & Insert:** During Step 2, 2.5, and 3, the extension automatically clears the Style input and pastes the saved lyrics. At Step 5, it automatically restores the original saved Style prompt and lyrics.
 - **Simplified UI:** The manual "Grab Active" and "Push Active" buttons have been completely removed. The vault is now a read-only accordion panel (`📁 METADATA VAULT (AUTOMATED)`) that shows the stashed values in real-time. Manual keystrokes in the inputs sync instantly.
 - **Path Resetting:** Clicking the **Reset Path** button instantly returns the user to Step 1 and clears the stashed vault metadata in `localStorage` so a new song session can begin.
+- **Robust Mode Selector:** Auto-switching modes (Extend ↔ Cover) has been made bulletproof. The extension checks if a direct tab button for the target mode is visible and clicks it. If not, it opens the dropdown selector (scoping the search inside the active creation panel container to prevent clicking buttons in the workspace feed, and cleaning special glyph symbols like `▼` / `▾`). It dynamically polls for the option and clicks it.
+- **Awaiting DOM Rendering:** It utilizes a polling-based `waitForElement` engine instead of static timeouts, ensuring that setting target timecodes (like `00:01.0` or `00:06.0`) or injecting vault metadata only executes once the React inputs are fully rendered and interactive.
 
 ### 2. High-Readability Backlit Glow UI
 - **Full-Width Bars:** The step cards (`.vnr-step-item`) have no border-radius and negative horizontal margins, making them span the entire width of the slide panel.

@@ -1,4 +1,4 @@
-// background.js - VNR MUD-KUTTER Service Worker
+// background.js - VNR Suno-Enhanced Service Worker
 chrome.runtime.onInstalled.addListener(() => {
-    console.log("VNR MUD-KUTTER: Performance shield and telemetry blocker active.");
+    console.log("VNR Suno-Enhanced: Performance shield and telemetry blocker active.");
 });

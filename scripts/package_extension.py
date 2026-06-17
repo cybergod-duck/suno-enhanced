@@ -11,18 +11,16 @@ if os.path.exists(ext_dir):
     shutil.rmtree(ext_dir)
 os.makedirs(ext_dir, exist_ok=True)
 
-# 2. Create Icons (cropped to bounding box: left=84, top=252, right=603, bottom=771)
+# 2. Create Icons (Resize directly without cropping)
 source_icon = r"C:\Users\ovjup\.gemini\antigravity\brain\2b716104-ed0b-4d2d-a538-09caffc14132\media__1781658398072.png"
 
 try:
     img = Image.open(source_icon)
-    # Crop to the centered rounded square
-    cropped = img.crop((84, 252, 603, 771))
     
-    # Save resized versions
-    cropped.resize((16, 16), Image.Resampling.LANCZOS).save(os.path.join(ext_dir, "icon16.png"))
-    cropped.resize((48, 48), Image.Resampling.LANCZOS).save(os.path.join(ext_dir, "icon48.png"))
-    cropped.resize((128, 128), Image.Resampling.LANCZOS).save(os.path.join(ext_dir, "icon128.png"))
+    # Save resized versions directly
+    img.resize((16, 16), Image.Resampling.LANCZOS).save(os.path.join(ext_dir, "icon16.png"))
+    img.resize((48, 48), Image.Resampling.LANCZOS).save(os.path.join(ext_dir, "icon48.png"))
+    img.resize((128, 128), Image.Resampling.LANCZOS).save(os.path.join(ext_dir, "icon128.png"))
     print("Sharp icons created successfully.")
 except Exception as e:
     print("Error creating icons:", e)
@@ -67,9 +65,9 @@ with open(os.path.join(ext_dir, "manifest.json"), "w", encoding="utf-8") as f:
 print("manifest.json written.")
 
 # 4. Write background.js
-background_js = """// background.js - VNR MUD-KUTTER Service Worker
+background_js = """// background.js - VNR Suno-Enhanced Service Worker
 chrome.runtime.onInstalled.addListener(() => {
-    console.log("VNR MUD-KUTTER: Performance shield and telemetry blocker active.");
+    console.log("VNR Suno-Enhanced: Performance shield and telemetry blocker active.");
 });
 """
 with open(os.path.join(ext_dir, "background.js"), "w", encoding="utf-8") as f:
