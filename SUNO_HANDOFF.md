@@ -130,6 +130,7 @@ Must run on a **Get Whole Song compiled output**. Running on an uncompiled Cover
 | 2026-06-17 | GitHub connector authorized | User | Perplexity now has live read access to repo |
 | 2026-06-17 | Handoff file created | Perplexity | Communication tunnel opened |
 | 2026-06-17 | Robust mode-select & element polling implemented | AG | Fixed Extend mode auto-selection via direct tab clicks, scoped element searches, glyph-stripping, and waitForElement polling. Zipped & pushed to GitHub. |
+| 2026-06-17 | Fixed runGenesis prompt cropping bugs | AG | Updated runGenesis to use prompts and lyrics exactly as-is without token reconstruction or wrapping. Zipped & pushed to GitHub. |
 
 ---
 
